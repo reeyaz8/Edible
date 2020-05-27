@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'NavBarScreens/bakeryPage.dart';
 
 class Navigation extends StatefulWidget {
+    const Navigation({Key key}) : super(key: key);
+
   @override
   _NavigationState createState() => _NavigationState();
 }
@@ -108,7 +110,9 @@ class _NavigationState extends State<Navigation> {
             ],
             ),
             Container(width: 10.0, color: Colors.white,),
-            Expanded(child: screens[_selectedIndex])
+            Expanded(
+              key: PageStorageKey('navigation'),
+              child: screens[_selectedIndex])
           ],
         ),
       ),

@@ -1,34 +1,15 @@
-import 'dart:io';
-import 'package:Edible/Provider/Recommender/recommenderImage.dart';
-import 'package:Edible/Provider/pathProvider/path.dart';
+import 'dart:async';
+import 'package:Edible/Screens/bottomSheet.dart';
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class FruitPage extends StatelessWidget {
-  SharedPreferences preferences;
-  String path;
-  List<String> _list;
+  
   @override
   Widget build(BuildContext context) {
-    final recommendDataStatus = Provider.of<ImageRecommendation>(context);
-    final getpath = Provider.of<PathProvider>(context);
-    path = getpath.fullPath;
-    if (recommendDataStatus.fruitRetrieveComplete == true){
-    //   getApplicationDocumentsDirectory().then((value) {
-    //    path = value.path;
-    // });
-    SharedPreferences.getInstance().then((value) => preferences = value);
-    _list = preferences.getStringList('fruitRecommendation');
-    }
-    
     return Scaffold(
       backgroundColor: Colors.white,
-      body: recommendDataStatus.fruitRetrieveComplete == false ? Container(
-        child: CircularProgressIndicator()
-      ) : Container(
-        height: MediaQuery.of(context).size.height-60.0,
+      body:Container(
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
@@ -71,53 +52,57 @@ class FruitPage extends StatelessWidget {
                 ],
               ),
               SizedBox(height:30.0),
-              Container(
-                height: 200.0,
+            Container(
+                margin: EdgeInsets.only(right:10.0),
+                height: MediaQuery.of(context).size.height-450.0,
+                width: MediaQuery.of(context).size.width,
+                color: Colors.white,
                 child: ListView.builder(
-                  itemCount:4,
-                  scrollDirection: Axis.horizontal,
                   physics: BouncingScrollPhysics(),
-                  itemBuilder: (context, int index) {
-                      return Column(
-                        children: <Widget>[
-                          Container(
-                            height: 100.0,
-                            width: 150.0,
-                            child: Image.file(File(path+'/'+_list[index]), height: 50.0 , width: 50.0,)),
-                          Container(
-                          height: 100.0,
-                          alignment: Alignment.topCenter,
-                          margin: EdgeInsets.only(right:15.0),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(12.0)),
-                          color: Colors.orange,
-                          ),
-                          width: 150.0,
-                          child: Column(
-                            children: <Widget>[
-                              Text(
-                                preferences.getStringList(_list[index])[0].toString(),
-                                style: TextStyle(color: Colors.white, fontSize: 20.0),
-                                ),
-                              SizedBox(height:5.0),
-                              Text('Rs. '+preferences.getStringList(_list[index])[1].toString()+' /kg',
-                                style: TextStyle(color: Colors.white, fontSize: 16.0),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 5,
+                  itemBuilder: (context, int index){
+                    return Container(
+                      width: MediaQuery.of(context).size.width/2.5,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(12.0)),
+                        color:Colors.blue
+                      ),
+                      margin: EdgeInsets.only(right:10.0),
+                      alignment: Alignment.topCenter,
+                      child: GestureDetector(
+                        onTap: (){
+                            bottomSheet(context, 'Orange', '200 kg', '5.0');
+                        },
+                          child: Container(
+                          child: Column(children: <Widget>[
+                              Container(
+                                height: MediaQuery.of(context).size.height - 550,
+                                child: Image.asset('images/beer.png')),
+                              SizedBox(height: 15.0),
+                              Container(
+                                alignment: Alignment.center,
+                                child: FittedBox(
+                                  fit: BoxFit.contain,
+                                  child: Text('Orange', style: TextStyle(color: Colors.white, fontSize: 20.0))
+                                )
                               ),
-                              SizedBox(height:5.0),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  IconButton(icon: Icon(Icons.favorite_border, color: Colors.white,), onPressed: (){}),
-                                  IconButton(icon: Icon(Icons.add_shopping_cart, color: Colors.white), onPressed: (){}),
-                                ],
+                              Container(
+                                alignment: Alignment.center,
+                                margin: EdgeInsets.only(left:5.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                  Container(child: Text('Rs. 200 /kg', style: TextStyle(fontSize: 15.0 ,color:Colors.white))),
+                                  IconButton(icon: Icon(Icons.add_shopping_cart, color: Colors.white), onPressed: (){})
+                                ],),
                               )
-                            ],
-                          )
-                    ),
-                        ],
-                      );
+                          ],)
+                        ),
+                      ),
+                    );
                   },
-                ),
+                )
               ),
               Container(
                 child: SizedBox(height: 25.0),
