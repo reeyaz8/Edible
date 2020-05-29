@@ -17,7 +17,7 @@ Future<FirebaseUser> signInwithFacebook() async {
         print(user.isEmailVerified);
         print(user.displayName);
         print(user.email);
-        print(user.phoneNumber);
+        print(user.sendEmailVerification());
         assert(user.email != null);
         assert(user.displayName != null);
         assert(!user.isAnonymous);

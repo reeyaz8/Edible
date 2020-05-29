@@ -120,6 +120,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.1+2"
+  firebase_storage:
+    dependency: "direct main"
+    description:
+      name: firebase_storage
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.1.6"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -132,6 +139,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.0"
+  flutter_pagination_helper:
+    dependency: "direct main"
+    description:
+      name: flutter_pagination_helper
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1+2"
   flutter_test:
     dependency: "direct dev"
     description: flutter

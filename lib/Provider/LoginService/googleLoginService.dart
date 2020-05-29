@@ -20,13 +20,18 @@ Future<String> signInWithGoogle() async {
   final AuthResult authResult = await _auth.signInWithCredential(credential);
   final FirebaseUser user = authResult.user;
 
-  assert(user.email != null);
-  assert(user.displayName != null);
-  assert(user.photoUrl != null);
+  // assert(user.email != null);
+  // assert(user.displayName != null);
+  // assert(user.photoUrl != null);
 
   name = user.displayName;
-  email = user.email;
+  // print(name);
+  email = googleSignInAccount.email;
+  // print(email);
+  // print(authResult.additionalUserInfo);
+  // print(user.);
   imageUrl = user.photoUrl;
+  // print(imageUrl);
 
   if (name.contains(" ")) {
     name = name.substring(0, name.indexOf(" "));
@@ -34,7 +39,6 @@ Future<String> signInWithGoogle() async {
 
   assert(!user.isAnonymous);
   assert(await user.getIdToken() != null);
-
   final FirebaseUser currentUser = await _auth.currentUser();
   assert(user.uid == currentUser.uid);
 

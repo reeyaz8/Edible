@@ -36,15 +36,16 @@ class _SplashScreenState extends State<SplashScreen> {
             child: OutlineButton(
       splashColor: Colors.grey,
       onPressed: () {
-        signInWithGoogle().whenComplete(() {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) {
-                return Navigation();
-              },
-            ),
-          );
-        });
+        signInWithGoogle();
+        // .whenComplete(() {
+        //   Navigator.of(context).push(
+        //     MaterialPageRoute(
+        //       builder: (context) {
+        //         return Navigation();
+        //       },
+        //     ),
+        //   );
+        // });
       },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
       highlightElevation: 0,
@@ -77,7 +78,8 @@ class _SplashScreenState extends State<SplashScreen> {
             child: OutlineButton(
       splashColor: Colors.grey,
       onPressed: () {
-       signInwithFacebook().whenComplete(() => Navigator.of(context).push(MaterialPageRoute(builder: (context) => Navigation())));
+       signInwithFacebook();
+      //  .whenComplete(() => Navigator.of(context).push(MaterialPageRoute(builder: (context) => Navigation())));
       },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
       highlightElevation: 0,
