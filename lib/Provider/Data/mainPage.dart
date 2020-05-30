@@ -20,9 +20,11 @@ class FruitRecommendation with ChangeNotifier{
 
       _recommenddata = collection["recommend"];
       _saledata = collection["hotsale"];
+
       for (var i = 0; i < collection['recommend'].length; i++) {
           await  ImageRetriver().getImagewithID(collection['recommend'][i]['_id'], 'Fruits');
       }
+      
       for (var i = 0; i < collection['hotsale'].length; i++) {
           await  ImageRetriver().getImagewithID(collection['hotsale'][i]['_id'], 'Fruits');
       }

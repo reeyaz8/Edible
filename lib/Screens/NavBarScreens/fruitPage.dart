@@ -1,10 +1,13 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:Edible/Provider/Data/allFruit.dart';
+import 'package:Edible/Provider/Data/bottomSheetData.dart';
+import 'package:Edible/Provider/Data/cartData.dart';
 import 'package:Edible/Provider/Data/mainPage.dart';
 import 'package:Edible/Provider/Data/overhead.dart';
 import 'package:Edible/Screens/AllItems/allFruit.dart';
-import 'package:Edible/Screens/bottomSheet.dart';
+import 'package:Edible/Screens/bottomsheet.dart';
+import 'package:Edible/Screens/searchPage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,7 +16,9 @@ class FruitPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final data = Provider.of<FruitRecommendation>(context);
     final overhead = Provider.of<FruitOverhead>(context);
-    
+    final cartdata = Provider.of<CartData>(context);
+    final cartlist = Provider.of<CartPageData>(context);
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: data.hasData == false ? Center(
@@ -58,7 +63,9 @@ class FruitPage extends StatelessWidget {
                           borderRadius: BorderRadius.all(Radius.circular(8.0)),
                           color: Colors.yellowAccent
                         ),
-                        child: IconButton(icon: Icon(Icons.search), color: Colors.grey, onPressed: () {},)
+                        child: IconButton(icon: Icon(Icons.search), color: Colors.grey, onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => SearchPage()));
+                        },)
                   )
                 ],
               ),
@@ -85,13 +92,16 @@ class FruitPage extends StatelessWidget {
                       child: GestureDetector(
                         onTap: (){
                             overhead.retrieveOverheadData(data.recommenddata[index]['_id']);
-                            showModalBottomSheet(context: (context), 
+                            cartdata.initPrice(int.parse(data.recommenddata[index]['price']));
+                            cartdata.initQuantity();
+
+                            Future(() => showModalBottomSheet(context: (context), 
                             elevation: 0.0,
                             enableDrag: true,
                             isScrollControlled: true,
                             builder: (_) {
-                            return bottomSheet(context, data.recommenddata[index]['fullName'], data.recommenddata[index]['price'], data.recommenddata[index]['rating'], data.recommenddata[index]['_id']);
-                            });
+                              return BottomSheetModal(name: data.recommenddata[index]['fullName'], price: data.recommenddata[index]['price'], rating: data.recommenddata[index]['rating'], id: data.recommenddata[index]['_id']);
+                            }));
                             },
                           child: Container(
                           child: Column(children: <Widget>[
@@ -114,7 +124,9 @@ class FruitPage extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
                                   Container(child: Text('Rs. '+data.recommenddata[index]['price']+ ' /kg', style: TextStyle(fontSize: 15.0 ,color:Colors.white))),
-                                  IconButton(icon: Icon(Icons.add_shopping_cart, color: Colors.white), onPressed: (){})
+                                  IconButton(icon: Icon(Icons.add_shopping_cart, color: Colors.white), onPressed: (){
+                                    cartlist.updateCartList(data.recommenddata[index]['fullName'], '1', data.recommenddata[index]['price']);
+                                  })
                                 ],
                                 ),
                               )
@@ -146,7 +158,9 @@ class FruitPage extends StatelessWidget {
                 ],),
               FlatButton(onPressed: (){
                   final fruitData = Provider.of<AllFruitData>(context, listen: false);
-                  fruitData.getPartialFruitData('0', '10');
+                  if (fruitData.newList.length == 0 ){
+                      fruitData.getPartialFruitData('0', '6');
+                  }
                   Navigator.push(context, MaterialPageRoute(builder: (_) => AllFruit()));
               }, child: Text('See all', style: TextStyle(color: Colors.blue)))
               ],),
@@ -173,12 +187,14 @@ class FruitPage extends StatelessWidget {
                       child: GestureDetector(
                           onTap: (){
                             overhead.retrieveOverheadData(data.saledata[index]['_id']);
+                            cartdata.initPrice(int.parse(data.saledata[index]['price']));
+                            cartdata.initQuantity();
                             showModalBottomSheet(context: (context), 
                             elevation: 0.0,
                             enableDrag: true,
                             isScrollControlled: true,
                             builder: (_) {
-                            return bottomSheet(context, data.saledata[index]['fullName'], data.saledata[index]['price'], data.saledata[index]['rating'], data.saledata[index]['_id']);
+                              return BottomSheetModal(name: data.saledata[index]['fullName'], price: data.saledata[index]['price'], rating: data.saledata[index]['rating'], id: data.saledata[index]['_id']);
                             });
                           },
                           child: Container(
@@ -201,7 +217,9 @@ class FruitPage extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
                                   Container(child: Text('Rs. '+data.saledata[index]['price']+' /kg', style: TextStyle(fontSize: 15.0 ,color:Colors.white))),
-                                  IconButton(icon: Icon(Icons.add_shopping_cart, color: Colors.white), onPressed: (){})
+                                  IconButton(icon: Icon(Icons.add_shopping_cart, color: Colors.white), onPressed: (){
+                                    cartlist.updateCartList(data.saledata[index]['fullName'], '1', data.saledata[index]['price']);
+                                  })
                                 ],),
                               )
                           ],)

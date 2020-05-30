@@ -267,12 +267,15 @@ class _BeveragePageState extends State<BeveragePage> {
                               ),
                           ),
                         ],
-                      ))
+                      )
+                      )
                   );
-                })
+                }
+                )
             ),
           )
-        ],)
+        ],
+        )
       ),
     );
   }

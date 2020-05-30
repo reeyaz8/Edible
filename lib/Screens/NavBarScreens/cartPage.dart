@@ -1,8 +1,12 @@
+import 'package:Edible/Provider/Data/cartData.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+  final cartlist = Provider.of<CartPageData>(context);
+
     return Scaffold(
       backgroundColor: Colors.white,
         body: Column(
@@ -19,7 +23,7 @@ class CartPage extends StatelessWidget {
                 Expanded(
                   child: ListView.builder(
                     physics: BouncingScrollPhysics(),
-                    itemCount: 5,
+                    itemCount: cartlist.listData.length,
                     itemBuilder: (context, int index) {
                     return Container(
                     margin: EdgeInsets.only(bottom: 10.0 ,left:10.0, right: 10.0),
@@ -34,7 +38,7 @@ class CartPage extends StatelessWidget {
                           alignment: Alignment.center,
                           height: 40.0,
                           width: MediaQuery.of(context).size.width/2.5,
-                          child: Text('Orange')
+                          child: Text(cartlist.listData[index]['fullName'])
                           ),
                         Container(
                          alignment: Alignment.center,
@@ -44,7 +48,7 @@ class CartPage extends StatelessWidget {
                               color: Colors.orangeAccent,
                               borderRadius: BorderRadius.all(Radius.circular(12.0))
                           ),
-                         child: Text('23 Kg')
+                         child: Text(cartlist.listData[index]['quantity']+' kg')
                          ),
                         Container(
                          alignment: Alignment.center,
@@ -54,7 +58,7 @@ class CartPage extends StatelessWidget {
                               color: Colors.orangeAccent,
                               borderRadius: BorderRadius.all(Radius.circular(12.0))
                           ),
-                         child: Text('Rs. 200')
+                         child: Text('Rs. '+cartlist.listData[index]['price'])
                        )
                       ],
                     ),

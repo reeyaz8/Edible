@@ -1,6 +1,9 @@
 import 'package:Edible/Provider/Data/allFruit.dart';
+import 'package:Edible/Provider/Data/bottomSheetData.dart';
+import 'package:Edible/Provider/Data/cartData.dart';
 import 'package:Edible/Provider/Data/mainPage.dart';
 import 'package:Edible/Provider/Data/overhead.dart';
+import 'package:Edible/Provider/Data/search.dart';
 import 'package:Edible/Screens/blankScreen.dart';
 import 'package:Edible/Screens/splashscreen.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +21,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => FruitRecommendation()),
         ChangeNotifierProvider(create: (_) => AllFruitData()),
         ChangeNotifierProvider(create: (_) => FruitOverhead()),
+        ChangeNotifierProvider(create: (_) => Search()),
+        ChangeNotifierProvider(create: (_) => CartData()),
+        ChangeNotifierProvider(create: (_) => CartPageData()),
       ],
       child: MaterialApp(
       title: 'Edible',
@@ -26,7 +32,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       debugShowCheckedModeBanner: false,
-      home: SplashScreen()
+      home: BlankScreen()
         ),
     );
   }
