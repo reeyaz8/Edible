@@ -2,6 +2,8 @@ import 'dart:async';
 import 'package:Edible/Provider/LoginService/googleLoginService.dart';
 import 'package:Edible/Provider/LoginService/facebookLoginService.dart';
 import 'package:Edible/Screens/NavigationRail.dart';
+import 'package:Edible/Screens/loginPage.dart';
+import 'package:Edible/Screens/registerScreens/registerPage.dart';
 import 'package:flutter/material.dart';
 class SplashScreen extends StatefulWidget {
   @override
@@ -36,31 +38,22 @@ class _SplashScreenState extends State<SplashScreen> {
             child: OutlineButton(
       splashColor: Colors.grey,
       onPressed: () {
-        signInWithGoogle();
-        // .whenComplete(() {
-        //   Navigator.of(context).push(
-        //     MaterialPageRoute(
-        //       builder: (context) {
-        //         return Navigation();
-        //       },
-        //     ),
-        //   );
-        // });
+       Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
       },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
       highlightElevation: 0,
-      borderSide: BorderSide(color: Colors.grey),
+      borderSide: BorderSide(color: Colors.blue, width: 2.0),
       child: Padding(
         padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Image(image: AssetImage("images/google_logo.png"), height: 20.0),
+            Image(image: AssetImage("images/logo.png"), height: 20.0),
             Padding(
               padding: const EdgeInsets.only(left: 10),
               child: Text(
-                'Sign in with Google',
+                'Sign In',
                 style: TextStyle(
                   fontSize: 18.0,
                   color: Colors.grey,
@@ -78,23 +71,22 @@ class _SplashScreenState extends State<SplashScreen> {
             child: OutlineButton(
       splashColor: Colors.grey,
       onPressed: () {
-       signInwithFacebook();
-      //  .whenComplete(() => Navigator.of(context).push(MaterialPageRoute(builder: (context) => Navigation())));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterPage()));
       },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
       highlightElevation: 0,
-      borderSide: BorderSide(color: Colors.grey),
+      borderSide: BorderSide(color: Colors.green, width:2.0),
       child: Padding(
         padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Image(image: AssetImage("images/facebook_logo.png"), height: 20.0),
+            Image(image: AssetImage("images/logo.png"), height: 20.0),
             Padding(
               padding: const EdgeInsets.only(left: 10),
               child: Text(
-                'Sign in with Facebook',
+                'Register',
                 style: TextStyle(
                   fontSize: 18.0,
                   color: Colors.grey,
@@ -108,7 +100,7 @@ class _SplashScreenState extends State<SplashScreen> {
           ),
           SizedBox(height: 8.0,),
           Container(child:
-           Text('By signing in, you accept our Terms and Conditions',
+           Text('By using edible, you accept our Terms and Conditions',
            style: TextStyle(fontSize:10.0),),)
         ]
       ),
