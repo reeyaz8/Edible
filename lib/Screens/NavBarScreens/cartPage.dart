@@ -21,7 +21,23 @@ class CartPage extends StatelessWidget {
                 ),
                 SizedBox(height: 20.0),
                 Expanded(
-                  child: ListView.builder(
+                  child: cartlist.listData.length == 0 ? Container(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children:<Widget>[
+                         Text('You have no any item added to cart'),
+                         SizedBox(height:20.0),
+                         RaisedButton(
+                           elevation: 0.0,
+                           shape: RoundedRectangleBorder(
+                             borderRadius: BorderRadius.circular(10.0)
+                           ),
+                           onPressed: (){
+                             
+                           }, child: Text('Explore'))
+                    ])
+                  ) : ListView.builder(
                     physics: BouncingScrollPhysics(),
                     itemCount: cartlist.listData.length,
                     itemBuilder: (context, int index) {
@@ -59,7 +75,38 @@ class CartPage extends StatelessWidget {
                               borderRadius: BorderRadius.all(Radius.circular(12.0))
                           ),
                          child: Text('Rs. '+cartlist.listData[index]['price'])
-                       )
+                        ),
+                        Container(
+                          child: GestureDetector(
+                            onTap: (){
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    titlePadding: EdgeInsets.symmetric(vertical: 10.0),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12.0),
+                                    ),
+                                    title: Text('Delete Item', textAlign: TextAlign.center ,style: TextStyle(fontSize:18.0),),
+                                    content: Text('Are you sure want to delete '+cartlist.listData[index]['fullName']+' from cart?'),
+                                    contentPadding: EdgeInsets.symmetric(horizontal: 12.0),
+                                    actions: <Widget>[
+                                      FlatButton(onPressed: (){
+                                          Navigator.pop(context);
+                                      }, child: Text('Cancel', style: TextStyle(color: Colors.red),),),
+                                      FlatButton(onPressed: (){
+                                          cartlist.deleteCartList(index, cartlist.listData[index]['price']);
+                                          Navigator.pop(context);
+                                      }, child: Text('Confirm'))
+                                    ],
+                                    
+                                  );
+                                },
+                                );
+                            },
+                            child: Icon(Icons.delete)
+                          )
+                        ),
                       ],
                     ),
                       );
@@ -85,13 +132,13 @@ class CartPage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children:<Widget>[
                           Text('Total', style: TextStyle(fontSize:16.0)),
-                          Text('Rs. 2000', style: TextStyle(fontSize: 22.0),)
+                          Text('Rs. '+cartlist.checkOutPrice.toString(), style: TextStyle(fontSize: 22.0),)
                         ]
                       ),
                     ),
                   Container(
                     child: RaisedButton.icon(onPressed: (){
-
+                      
                     },
                     padding: EdgeInsets.only(left:20.0, right:20.0),
                     shape: RoundedRectangleBorder(

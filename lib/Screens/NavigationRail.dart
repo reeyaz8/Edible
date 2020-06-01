@@ -1,30 +1,26 @@
+import 'package:Edible/Provider/Data/navRailIndex.dart';
 import 'package:Edible/Screens/NavBarScreens/accountPage.dart';
 import 'package:Edible/Screens/NavBarScreens/beveragePage.dart';
 import 'package:Edible/Screens/NavBarScreens/cartPage.dart';
 import 'package:Edible/Screens/NavBarScreens/fruitPage.dart';
 import 'package:Edible/Screens/NavBarScreens/vegetablePage.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'NavBarScreens/bakeryPage.dart';
 
-class Navigation extends StatefulWidget {
-    const Navigation({Key key}) : super(key: key);
-
-  @override
-  _NavigationState createState() => _NavigationState();
-}
-
-class _NavigationState extends State<Navigation> {
+class Navigation extends StatelessWidget {
   int _selectedIndex = 2;
   List<Widget> screens = [BakeryPage(), BeveragePage(), FruitPage(), VegetablePage(), CartPage(), AccountPage()];
   @override
   Widget build(BuildContext context) {
+    final navrailIndex = Provider.of<NavRailIndex>(context);
     return SafeArea(
         child: Scaffold(
         body: Row(
         children: <Widget>[
           NavigationRail(
           minWidth: 30.0,
-          selectedIndex: _selectedIndex,
+          selectedIndex: navrailIndex.currentIndex,
           selectedLabelTextStyle: TextStyle(
               color: Colors.deepOrange,
               fontWeight: FontWeight.bold,
@@ -43,9 +39,8 @@ class _NavigationState extends State<Navigation> {
             size:25.0
           ),
           onDestinationSelected: (int index) {
-            setState(() {
-              _selectedIndex = index;
-            });
+            navrailIndex.changeIndex(index);
+          
           },
           groupAlignment: 0.0,
           labelType: NavigationRailLabelType.all,
@@ -110,8 +105,7 @@ class _NavigationState extends State<Navigation> {
           ),
           Container(width: 10.0, color: Colors.white,),
           Expanded(
-            // key: PageStorageKey('navigation'),
-            child: screens[_selectedIndex])
+            child: screens[navrailIndex.currentIndex])
         ],
           ),
       ),

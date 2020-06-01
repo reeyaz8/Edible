@@ -7,8 +7,10 @@ import 'package:Edible/Screens/bottomsheet.dart';
 import 'package:Edible/Screens/searchPage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'dart:math';
 class AllFruit extends StatelessWidget {
+  static int _skip = Random().nextInt(11);
+  static int _limit = 4;
   @override
   Widget build(BuildContext context) {
     final fruitData = Provider.of<AllFruitData>(context);
@@ -38,7 +40,7 @@ class AllFruit extends StatelessWidget {
         NotificationListener<ScrollNotification>(
           onNotification: (ScrollNotification scrollInfo){
             if(fruitData.changeLoadingState == false && scrollInfo.metrics.pixels == scrollInfo.metrics.maxScrollExtent){
-              fruitData.getPartialFruitData('3', '2');
+              fruitData.getPartialFruitData(_skip.toString(), _limit.toString());
             }
             return true;
           },

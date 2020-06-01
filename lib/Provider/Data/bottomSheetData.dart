@@ -8,6 +8,8 @@ class CartData with ChangeNotifier{
   int _price = 0;
   int get price => _price;
 
+
+
   initPrice(int price){
     _price = price;
   }
@@ -43,6 +45,11 @@ class CartData with ChangeNotifier{
     else{
       _quantity = _quantity - 1;
     }
+    notifyListeners();
+  }
+
+  updatedPrice(int incomingPrice){
+    _price = _price + incomingPrice;
     notifyListeners();
   }
 }

@@ -56,6 +56,9 @@ class RegisterPage extends StatelessWidget {
                               border: new OutlineInputBorder(
                               borderRadius: BorderRadius.all(Radius.circular(10.0))
                             ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.red)
+                            )
                           ),
                         ),
                       ),
@@ -75,13 +78,16 @@ class RegisterPage extends StatelessWidget {
                                 border: new OutlineInputBorder(
                                 borderRadius: BorderRadius.all(Radius.circular(10.0))
                               ),
-                              errorText: registerProvider.isMobileInvalid == true ? 'Invalid Mobile Number':null
                             ),
                 ),
                         ),
                       ),
                     ],
                   )),
+                  SizedBox(height: 5.0),
+                  Container(
+                    margin: EdgeInsets.only(left:10.0),
+                    child:registerProvider.isMobileInvalid == true ? Text('Invalid Mobile Number', style: TextStyle(color: Colors.red, fontSize:12.0),):null ),
                 SizedBox(height:20.0),
             Container(
                   child: Text('Full Name'),
@@ -174,11 +180,12 @@ class RegisterPage extends StatelessWidget {
                     elevation: 0.0,
                     color: Colors.blue,
                     onPressed: (){
+                      registerProvider.updateCountryCode(_countrycodecontroller.text.trim());
                       registerProvider.getFullName(_fullnamecontroller.text.trim());
                       registerProvider.getMobileNumber(_mobilenumbercontroller.text.trim());
                       if(registerProvider.hasgenderselected == true && registerProvider.conditionaccepted == true && registerProvider.invalidFullName == false && registerProvider.isMobileInvalid == false){
                           PhoneSignClass().signInwithPhone(context, _countrycodecontroller.text+_mobilenumbercontroller.text);
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => OTPVerification()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => OTPVerification(phonenumber : _countrycodecontroller.text.trim()+'-'+_mobilenumbercontroller.text.trim())));
                       }
                       }, child: Text('Proceed', style: TextStyle(color: Colors.white),),),),
                   SizedBox(height: 15.0,),

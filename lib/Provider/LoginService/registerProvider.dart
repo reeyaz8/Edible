@@ -24,18 +24,37 @@ class RegisterProvider with ChangeNotifier{
   bool get ispasswordValid => _ispasswordValid;
 
   bool _isconfirmpasswordValid;
-  bool get isconfirmpasswordValid => _isconfirmpasswordValid; 
+  bool get isconfirmpasswordValid => _isconfirmpasswordValid;
 
+  String _name = '';
+  String get name => _name;
+
+  String _mobile = '';
+  String get mobile => _mobile;
+
+  String _ccode = '';
+  String get ccode => _ccode;
+
+  String _gender = '';
+  String get gender => _gender;
+
+  String _password = '';
+  String get password => _password;
 
   changeGender(int _selectedGenderValue){
     _selectedGender = _selectedGenderValue;
     _hasgenderselected = true;
+    _gender = _selectedGenderValue.toString();
     notifyListeners();
   }
 
   changeConditionStatus(bool status){
     _conditionaccepted = status;
     notifyListeners();
+  }
+
+  updateCountryCode(String code){
+    _ccode = code;
   }
 
   getFullName(String name){
@@ -45,6 +64,7 @@ class RegisterProvider with ChangeNotifier{
     }
     else{
       _invalidFullName = false;
+      _name = name;
       notifyListeners();
     }
   }
@@ -56,6 +76,7 @@ class RegisterProvider with ChangeNotifier{
     }
     else{
       _isMobileInvalid = false;
+      _mobile = updatedMobile;
       notifyListeners();
     }
   }
@@ -89,6 +110,7 @@ class RegisterProvider with ChangeNotifier{
     }
     else{
       _isconfirmpasswordValid = true;
+      _password = confirmpass;
       notifyListeners();
     }
   }

@@ -3,7 +3,6 @@ import 'package:Edible/Provider/Data/cartData.dart';
 import 'package:Edible/Provider/Data/overhead.dart';
 import 'package:Edible/Provider/Data/search.dart';
 import 'package:Edible/Screens/bottomsheet.dart';
-// import 'package:Edible/Screens/bottomSheet.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -80,8 +79,9 @@ class SearchPage extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                          Container(margin: EdgeInsets.only(left:8.0) ,child: Text('Rs. '+searchResult.searchData[index]['price']+' /kg', 
-                          style: TextStyle(color: Colors.white, fontSize:16.0),)),
+                          Container(margin: EdgeInsets.only(left:8.0) ,child: Text('Rs. '+searchResult.searchData[index]['price']+' /kg',
+                          style: TextStyle(color: Colors.white, fontSize:16.0),)
+                          ),
                           IconButton(icon: Icon(Icons.add_shopping_cart, color: Colors.white, size: 20.0,), onPressed: (){
                             cartlist.updateCartList(searchResult.searchData[index]['fullName'], '1' ,searchResult.searchData[index]['price']);
                           })

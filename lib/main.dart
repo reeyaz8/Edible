@@ -2,16 +2,22 @@ import 'package:Edible/Provider/Data/allFruit.dart';
 import 'package:Edible/Provider/Data/bottomSheetData.dart';
 import 'package:Edible/Provider/Data/cartData.dart';
 import 'package:Edible/Provider/Data/mainPage.dart';
+import 'package:Edible/Provider/Data/navRailIndex.dart';
 import 'package:Edible/Provider/Data/overhead.dart';
 import 'package:Edible/Provider/Data/search.dart';
+import 'package:Edible/Provider/LoginService/dbConnector.dart';
 import 'package:Edible/Provider/LoginService/loginProvider.dart';
+import 'package:Edible/Provider/LoginService/phoneLoginService.dart';
 import 'package:Edible/Provider/LoginService/registerProvider.dart';
 import 'package:Edible/Screens/blankScreen.dart';
 import 'package:Edible/Screens/loginPage.dart';
+import 'package:Edible/Screens/registerScreens/finalProcess.dart';
 import 'package:Edible/Screens/registerScreens/otpVerification.dart';
 import 'package:Edible/Screens/registerScreens/passwordSetup.dart';
 import 'package:Edible/Screens/registerScreens/registerPage.dart';
 import 'package:Edible/Screens/splashscreen.dart';
+import 'package:Edible/Screens/userSignStatus.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -24,6 +30,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (_) => NavRailIndex()),
         ChangeNotifierProvider(create: (_) => FruitRecommendation()),
         ChangeNotifierProvider(create: (_) => AllFruitData()),
         ChangeNotifierProvider(create: (_) => FruitOverhead()),
@@ -32,8 +39,10 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => CartPageData()),
         ChangeNotifierProvider(create: (_) => LoginProvider()),
         ChangeNotifierProvider(create: (_) => RegisterProvider()),
-
+        ChangeNotifierProvider(create: (_) => PhoneSignClass()),
+        ChangeNotifierProvider(create: (_) => UserEntryDB()),
       ],
+
       child: MaterialApp(
       title: 'Edible',
       theme: ThemeData(
@@ -41,8 +50,8 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       debugShowCheckedModeBanner: false,
-      home: PasswordSetup()
-        ),
+      home: SignInStatus()
+      ),
     );
   }
 }

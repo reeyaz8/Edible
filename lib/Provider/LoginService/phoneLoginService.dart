@@ -8,31 +8,35 @@ class PhoneSignClass with ChangeNotifier{
   static String _verificationId;
   var _authCredential;
 
+  bool _isOTPValid;
+  bool get isOTPValid => _isOTPValid;
+
+
   Future signInwithPhone(BuildContext context, String phonenumber) async {
     _auth.verifyPhoneNumber(
-          phoneNumber: phonenumber, 
-          timeout: Duration(seconds: 0), 
-          verificationCompleted: verificationCompleted,
-          verificationFailed: verificationfailed, 
-          codeSent: codeSent, 
+          phoneNumber: phonenumber,
+          timeout: Duration(seconds: 0),
+          verificationCompleted: null,
+          verificationFailed: verificationfailed,
+          codeSent: codeSent,
           codeAutoRetrievalTimeout: codeAutoRetrievalTimeout);
 }
   final PhoneVerificationCompleted verificationCompleted = (AuthCredential _authcredential){
             _auth.signInWithCredential(_authcredential).then((AuthResult result){
               if(result.user != null) {
-                // Navigator.push(context, MaterialPageRoute(builder: (context) => PasswordSetup()));
+                print('Automatic OTP Authentication');
               }
               else{
-                print('invalid otp');
+                print('Invalid OTP');
               }
             }).catchError((error){
-              print('failed authenticatuon');
+              print('OTP Authentication Failed');
             });
         };
 
   final PhoneVerificationFailed verificationfailed = (AuthException authException){
       if (authException.message.contains('not authorized')){
-        print('You are not aithorized');
+        print('Unauthorized access');
       }
       else if(authException.message.contains('Network')){
         print('Network Failure');
@@ -51,10 +55,14 @@ class PhoneSignClass with ChangeNotifier{
     print(verificationId);
   };
 
-  void signInwithPhoneNumber(BuildContext context ,String smsCode){
+  void signInManually(BuildContext context ,String smsCode){
     _authCredential = PhoneAuthProvider.getCredential(verificationId: _verificationId, smsCode: smsCode);
     _auth.signInWithCredential(_authCredential).then((AuthResult result){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => PasswordSetup()));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => PasswordSetup()));
+    }).catchError((error){
+      print(error);
+      _isOTPValid = false;
+      notifyListeners();
     });
   }
 }
