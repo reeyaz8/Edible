@@ -27,7 +27,7 @@ class AllFruitData with ChangeNotifier{
       _newList.addAll(collection);
 
       for (var i = 0; i < collection.length; i++) {
-            await  ImageRetriver().getImagewithID(collection[i]['_id'], 'Fruits');
+        await  ImageRetriver().getImagewithID(collection[i]['_id'], 'Fruits');
         }
       }
       _isLoading = true;

@@ -1,22 +1,22 @@
 import 'dart:io';
-import 'package:Edible/Provider/Data/allFruit.dart';
+import 'package:Edible/Provider/API_Call/Fruit/allFruit.dart';
 import 'package:Edible/Provider/Data/bottomSheetData.dart';
 import 'package:Edible/Provider/Data/cartData.dart';
-import 'package:Edible/Provider/Data/overhead.dart';
+import 'package:Edible/Provider/API_Call/Fruit/overhead.dart';
+import 'package:Edible/Provider/pathProvider/path.dart';
 import 'package:Edible/Screens/bottomsheet.dart';
 import 'package:Edible/Screens/searchPage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'dart:math';
 class AllFruit extends StatelessWidget {
-  static int _skip = Random().nextInt(11);
-  static int _limit = 4;
   @override
   Widget build(BuildContext context) {
     final fruitData = Provider.of<AllFruitData>(context);
     final overhead = Provider.of<FruitOverhead>(context);
     final cartdata = Provider.of<CartData>(context);
     final cartlist = Provider.of<CartPageData>(context);
+    final path = Provider.of<PathProvider>(context);
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -40,7 +40,7 @@ class AllFruit extends StatelessWidget {
         NotificationListener<ScrollNotification>(
           onNotification: (ScrollNotification scrollInfo){
             if(fruitData.changeLoadingState == false && scrollInfo.metrics.pixels == scrollInfo.metrics.maxScrollExtent){
-              fruitData.getPartialFruitData(_skip.toString(), _limit.toString());
+              fruitData.getPartialFruitData(Random().nextInt(11).toString(), Random().nextInt(4).toString());
             }
             return true;
           },
@@ -80,7 +80,7 @@ class AllFruit extends StatelessWidget {
                           Container(
                             width: 100.0,
                             height: 125.0,
-                            child: Image.file(File('/data/data/com.example.Edible/app_flutter/Fruits'+'/'+fruitData.newList[index]['_id'])),
+                            child: Image.file(File(path.fullPath+fruitData.newList[index]['_id'])),
                           ),
                           SizedBox(height:8.0),
                           Text(fruitData.newList[index]['fullName'],

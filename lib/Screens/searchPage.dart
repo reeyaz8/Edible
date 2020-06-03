@@ -1,7 +1,7 @@
 import 'package:Edible/Provider/Data/bottomSheetData.dart';
 import 'package:Edible/Provider/Data/cartData.dart';
-import 'package:Edible/Provider/Data/overhead.dart';
-import 'package:Edible/Provider/Data/search.dart';
+import 'package:Edible/Provider/API_Call/Fruit/overhead.dart';
+import 'package:Edible/Provider/API_Call/Fruit/search.dart';
 import 'package:Edible/Screens/bottomsheet.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

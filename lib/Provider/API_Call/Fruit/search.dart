@@ -34,7 +34,6 @@ class Search with ChangeNotifier{
       
     }
 
-
     notifyListeners();
 
   }

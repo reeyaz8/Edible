@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 class BeveragePage extends StatefulWidget {
   @override
   _BeveragePageState createState() => _BeveragePageState();
@@ -15,12 +16,13 @@ class _BeveragePageState extends State<BeveragePage> {
   bool isBeerSelected = false;
   bool isVodkaSelected = false;
   bool isWhiskeySelected = false;
+  List<String> _name = ['Tuborg', 'Kingfisher', 'Hinwa', 'Old Durbar'];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Container(
+      body:  Container(
         child: Column(children: <Widget>[
           SizedBox(height: 30.0),
           Row(
@@ -254,7 +256,7 @@ class _BeveragePageState extends State<BeveragePage> {
                           SizedBox(height:3.0),
                           Container(
                             alignment: Alignment.center,
-                            child: Text('Kingfisher Premium', maxLines: 2, style: TextStyle(color: Colors.white, fontSize: 16.0),)),
+                            child: Text(_name[index], maxLines: 2, style: TextStyle(color: Colors.white, fontSize: 16.0),)),
                           SizedBox(height: 3.0),
                           Container(
                               child: Row(

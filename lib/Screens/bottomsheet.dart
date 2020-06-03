@@ -1,7 +1,8 @@
 import 'dart:io';
 import 'package:Edible/Provider/Data/bottomSheetData.dart';
 import 'package:Edible/Provider/Data/cartData.dart';
-import 'package:Edible/Provider/Data/overhead.dart';
+import 'package:Edible/Provider/API_Call/Fruit/overhead.dart';
+import 'package:Edible/Provider/pathProvider/path.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -16,6 +17,8 @@ class BottomSheetModal extends StatelessWidget{
   final cartdata = Provider.of<CartData>(context);
   final overhead = Provider.of<FruitOverhead>(context);
   final cartlist = Provider.of<CartPageData>(context);
+    final path = Provider.of<PathProvider>(context);
+
       return Container(
         color: Color(0xFF737373),
         height: 475.0,
@@ -45,7 +48,7 @@ class BottomSheetModal extends StatelessWidget{
               SizedBox(height:5.0),
               Container(
                   height: MediaQuery.of(context).size.height / 4.5,
-                  child: Image.file(File('/data/data/com.example.Edible/app_flutter/Fruits'+'/'+id)),
+                  child: Image.file(File(path.fullPath+id)),
                   ),
               SizedBox(height:10.0),
               Container(

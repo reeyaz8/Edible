@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:toast/toast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UserEntryDB with ChangeNotifier{
 
@@ -10,6 +11,7 @@ class UserEntryDB with ChangeNotifier{
 
   sendDatatoDB(BuildContext context ,String name, String gender, String phone, String cCode, String password) async {
     Response response;
+    SharedPreferences preferences = await SharedPreferences.getInstance();
 
     response = await dio.post('http://192.168.254.8:3000/edible/register/', data: {
         "phone":phone,
@@ -21,6 +23,15 @@ class UserEntryDB with ChangeNotifier{
 
     if(response.statusCode == 201){
       Navigator.push(context, MaterialPageRoute(builder: (context) => BlankScreen()));
+      preferences.setString('phone', phone);
+      preferences.setString('name', name);
+      if(gender == '0'){
+        preferences.setString('gender', 'Male');
+      }else if(gender == '1'){
+        preferences.setString('gender', 'Female');
+      }else{
+        preferences.setString('gender', 'Other');
+      }
     }
 
     if(response.statusCode == 403 || response.statusCode == 500){

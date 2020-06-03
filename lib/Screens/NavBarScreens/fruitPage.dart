@@ -1,10 +1,11 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:Edible/Provider/Data/allFruit.dart';
+import 'package:Edible/Provider/API_Call/Fruit/allFruit.dart';
 import 'package:Edible/Provider/Data/bottomSheetData.dart';
 import 'package:Edible/Provider/Data/cartData.dart';
-import 'package:Edible/Provider/Data/mainPage.dart';
-import 'package:Edible/Provider/Data/overhead.dart';
+import 'package:Edible/Provider/API_Call/Fruit/mainPage.dart';
+import 'package:Edible/Provider/API_Call/Fruit/overhead.dart';
+import 'package:Edible/Provider/pathProvider/path.dart';
 import 'package:Edible/Screens/AllItems/allFruit.dart';
 import 'package:Edible/Screens/bottomsheet.dart';
 import 'package:Edible/Screens/searchPage.dart';
@@ -18,6 +19,7 @@ class FruitPage extends StatelessWidget {
     final overhead = Provider.of<FruitOverhead>(context);
     final cartdata = Provider.of<CartData>(context);
     final cartlist = Provider.of<CartPageData>(context);
+    final path = Provider.of<PathProvider>(context);
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -108,7 +110,7 @@ class FruitPage extends StatelessWidget {
                               Container(
                                 height: 100.0,
                                 width: 100.0,
-                                child: Image.file(File('/data/data/com.example.Edible/app_flutter/Fruits'+'/'+data.recommenddata[index]['_id']))),
+                                child: Image.file(File(path.fullPath+data.recommenddata[index]['_id']))),
                               SizedBox(height: 15.0),
                               Container(
                                 alignment: Alignment.center,
@@ -201,7 +203,7 @@ class FruitPage extends StatelessWidget {
                           child: Column(children: <Widget>[
                               Container(
                                 height: MediaQuery.of(context).size.height - 550,
-                                child: Image.file(File('/data/data/com.example.Edible/app_flutter/Fruits'+'/'+data.saledata[index]['_id']))),
+                                child: Image.file(File(path.fullPath+data.saledata[index]['_id']))),
                               SizedBox(height: 15.0),
                               Container(
                                 alignment: Alignment.center,

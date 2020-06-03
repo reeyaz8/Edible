@@ -53,8 +53,17 @@ class VegetablePage extends StatelessWidget {
           SizedBox(height:5.0),
           Container(
             width: 90.0,
-            child: Image.asset('images/beer.png')),
+            child: Image.asset('images/tomato.png')),
           SizedBox(height:5.0),
+          Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children:<Widget>[
+                IconButton(icon: Icon(Icons.favorite_border, color: Colors.white), onPressed: () {},),
+                IconButton(icon: Icon(Icons.add_shopping_cart, color: Colors.white), onPressed: () {},),
+              ]
+            ),
+        ),
           Text('Tomato', style: TextStyle(color:Colors.white, fontSize: 18.0), )
         ],)
                 );
@@ -70,7 +79,6 @@ class VegetablePage extends StatelessWidget {
         Text('Fill the basket with freshness', style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.w300)),
               ],),
               FlatButton(onPressed: (){
-                print('bjkgnkbngjkbnghknjmgknmhgn');
               }, child: Text('See all', style: TextStyle(color: Colors.blue),))
             ],),
             SizedBox(height:15.0),
@@ -95,7 +103,9 @@ class VegetablePage extends StatelessWidget {
                   child:Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
-                    Container(child: Image.asset('images/beer.png')),
+                    Container(
+                      width: 80.0,
+                      child: Image.asset('images/tomato.png')),
                     Container(child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,

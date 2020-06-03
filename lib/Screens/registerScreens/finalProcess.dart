@@ -5,6 +5,7 @@ import 'package:Edible/Screens/splashscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:toast/toast.dart';
+
 class FinalProcess extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -87,8 +88,8 @@ class FinalProcess extends StatelessWidget {
           Container(
             width: MediaQuery.of(context).size.width,
             child: OutlineButton(onPressed: (){
+              Toast.show('Please wait...', context, duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
               finalconfirmationrequest.sendDatatoDB(context ,allregisterdata.name, allregisterdata.gender, allregisterdata.mobile, allregisterdata.ccode, allregisterdata.password);
-             
             },
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(10.0))

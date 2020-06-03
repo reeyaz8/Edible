@@ -12,7 +12,12 @@ class FruitRecommendation with ChangeNotifier{
   List<dynamic> _saledata  = [];
   List<dynamic> get saledata => _saledata;
   bool get hasData => _hasData;
+
+  int _isImageDataComplete = 0;
+  int get isImageDataComplete => _isImageDataComplete;
+
   retrieveRecommendationData() async{
+    _isImageDataComplete = 0;
     Response response;
     response = await dio.get('http://192.168.254.8:3000/edible/mainItem?databaseName=Fruit');
     if(response.statusCode == 200) {
@@ -23,13 +28,22 @@ class FruitRecommendation with ChangeNotifier{
 
       for (var i = 0; i < collection['recommend'].length; i++) {
           await  ImageRetriver().getImagewithID(collection['recommend'][i]['_id'], 'Fruits');
+          _isImageDataComplete++;
+          if (_recommenddata.length+_saledata.length == _isImageDataComplete){
+              _hasData = true;
+                notifyListeners();
+            }
       }
       
       for (var i = 0; i < collection['hotsale'].length; i++) {
           await  ImageRetriver().getImagewithID(collection['hotsale'][i]['_id'], 'Fruits');
+          _isImageDataComplete++;
+          if (_recommenddata.length+_saledata.length == _isImageDataComplete){
+            _hasData = true;
+              notifyListeners();
+          }
       }
     }
-    _hasData = true;
-    notifyListeners();
+    
   }
 }

@@ -10,6 +10,6 @@ class PathProvider with ChangeNotifier{
 
   getPath() async{
     Directory directory = await getApplicationDocumentsDirectory();
-    _path = directory.path;
+    _path = directory.path+'/Fruits/';
   }
 }

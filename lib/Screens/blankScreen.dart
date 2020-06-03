@@ -1,5 +1,6 @@
 import 'dart:async';
-import 'package:Edible/Provider/Data/mainPage.dart';
+import 'package:Edible/Provider/API_Call/Fruit/mainPage.dart';
+import 'package:Edible/Provider/Data/accountData.dart';
 import 'package:Edible/Screens/NavigationRail.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -13,9 +14,11 @@ class BlankScreen extends StatefulWidget {
 class _BlankScreenState extends State<BlankScreen> {
   @override
   Widget build(BuildContext context) {
+    final accountload = Provider.of<AccountInfo>(context, listen: false);
+    accountload.loadAccountData();
     final mainData = Provider.of<FruitRecommendation>(context, listen: false);
     mainData.retrieveRecommendationData();
-    Timer(Duration(seconds: 5), () {
+    Timer(Duration(seconds: 10), () {
       Navigator.push(context, MaterialPageRoute(builder: (_) => Navigation()));
     });
     return WillPopScope(

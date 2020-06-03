@@ -1,5 +1,5 @@
+import 'package:Edible/Provider/LoginService/login.dart';
 import 'package:Edible/Provider/LoginService/loginProvider.dart';
-import 'package:Edible/Provider/LoginService/phoneLoginService.dart';
 import 'package:Edible/Screens/registerScreens/registerPage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -10,6 +10,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final loginProvider = Provider.of<LoginProvider>(context);
+    final login = Provider.of<Login>(context); 
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -112,6 +113,7 @@ class LoginPage extends StatelessWidget {
                   width: MediaQuery.of(context).size.width,
                   height: 50.0,
                   child: RaisedButton(
+                    
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.0)
                     ),
@@ -120,8 +122,25 @@ class LoginPage extends StatelessWidget {
                     onPressed: (){
                       loginProvider.getMobileNumber(_phonecontroller.text.trim());
                       loginProvider.getPassword(_passwordcontroller.text.trim());
-                      if (loginProvider.isMobileInvalid == false && loginProvider.isPasswordInvalid == false){
-                          print('Login Code Here');
+                      if (loginProvider.isMobileInvalid == false && loginProvider.isPasswordInvalid == false && login.isLogging == false){
+                            showDialog(
+                              barrierDismissible: false,
+                              context: context, builder:(context){
+                              return AlertDialog(
+                                content: Container(
+                                  height: 50.0,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children:<Widget>[
+                                        CircularProgressIndicator(),
+                                        SizedBox(width:50.0),
+                                        Text('Please Wait...')
+                                    ]
+                                  ),
+                                ),
+                              );
+                            });
+                            login.login(context, loginProvider.mobile, loginProvider.password);
                       }
                       }, child: Text('Login', style: TextStyle(color: Colors.white),),),),
                       SizedBox(height:20.0),
