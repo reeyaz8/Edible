@@ -1,4 +1,7 @@
 import 'package:Edible/Provider/API_Call/Fruit/allFruit.dart';
+import 'package:Edible/Provider/API_Call/Vegetable/allVegetable.dart';
+import 'package:Edible/Provider/API_Call/Vegetable/mainPage.dart';
+import 'package:Edible/Provider/API_Call/Vegetable/search.dart';
 import 'package:Edible/Provider/Data/accountData.dart';
 import 'package:Edible/Provider/Data/bottomSheetData.dart';
 import 'package:Edible/Provider/Data/cartData.dart';
@@ -29,7 +32,10 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => PathProvider()),
         ChangeNotifierProvider(create: (_) => NavRailIndex()),
         ChangeNotifierProvider(create: (_) => FruitRecommendation()),
+        ChangeNotifierProvider(create: (_) => VegetableRecommendation()),
         ChangeNotifierProvider(create: (_) => AllFruitData()),
+        ChangeNotifierProvider(create: (_) => AllVegetableData()),
+        ChangeNotifierProvider(create: (_) => VegetableSearch()),
         ChangeNotifierProvider(create: (_) => FruitOverhead()),
         ChangeNotifierProvider(create: (_) => Search()),
         ChangeNotifierProvider(create: (_) => CartData()),

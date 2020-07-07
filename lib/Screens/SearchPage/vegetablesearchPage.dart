@@ -1,16 +1,14 @@
+import 'package:Edible/Provider/API_Call/Vegetable/search.dart';
 import 'package:Edible/Provider/Data/bottomSheetData.dart';
 import 'package:Edible/Provider/Data/cartData.dart';
-import 'package:Edible/Provider/API_Call/Fruit/overhead.dart';
-import 'package:Edible/Provider/API_Call/Fruit/search.dart';
-import 'package:Edible/Screens/bottomsheet.dart';
+import 'package:Edible/Screens/bottomSheet/bottomSheetVeg.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class SearchPage extends StatelessWidget {
+class VegetableSearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final searchResult = Provider.of<Search>(context);
-    final overhead = Provider.of<FruitOverhead>(context);
+    final searchResult = Provider.of<VegetableSearch>(context);
     final cartdata = Provider.of<CartData>(context);
     final cartlist = Provider.of<CartPageData>(context);
 
@@ -29,10 +27,9 @@ class SearchPage extends StatelessWidget {
           keyboardType: TextInputType.text,
           decoration: InputDecoration(
           border: new OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(12.0))
           ),
           contentPadding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
-          hintText: 'Search...'
+          hintText: 'Search Vegetables'
         ),
         ),
         actions: <Widget>[
@@ -68,14 +65,8 @@ class SearchPage extends StatelessWidget {
                     ),
                     child: Column(children:<Widget>[
                         SizedBox(height: 8.0),
-                        Text(searchResult.searchData[index]['fullName'], style: TextStyle(color: Colors.white, fontSize:20.0),),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                          Icon(Icons.star_border, color: Colors.white, size: 16.0),
-                          Text(searchResult.searchData[index]['rating'], style: TextStyle(color: Colors.white, fontSize:12.0),),
-                        ],),
+                        Text(searchResult.searchData[index]['name'], style: TextStyle(color: Colors.white, fontSize:20.0),),
+                        SizedBox(height: 8.0),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
@@ -83,7 +74,7 @@ class SearchPage extends StatelessWidget {
                           style: TextStyle(color: Colors.white, fontSize:16.0),)
                           ),
                           IconButton(icon: Icon(Icons.add_shopping_cart, color: Colors.white, size: 20.0,), onPressed: (){
-                            cartlist.updateCartList(searchResult.searchData[index]['fullName'], '1' ,searchResult.searchData[index]['price']);
+                            cartlist.updateCartList(searchResult.searchData[index]['name'], '1' ,searchResult.searchData[index]['price']);
                           })
                         ],
                         ),
@@ -96,7 +87,6 @@ class SearchPage extends StatelessWidget {
                               ),
                               color: Colors.white,
                               onPressed: (){
-                                  overhead.retrieveOverheadData(searchResult.searchData[index]['_id']);
                                   cartdata.initPrice(int.parse(searchResult.searchData[index]['price']));
                                   cartdata.initQuantity();
                                   showModalBottomSheet(context: (context), 
@@ -104,7 +94,7 @@ class SearchPage extends StatelessWidget {
                                     enableDrag: true,
                                     isScrollControlled: true,
                                     builder: (_) {
-                                        return BottomSheetModal(name: searchResult.searchData[index]['fullName'], price: searchResult.searchData[index]['price'], rating:searchResult.searchData[index]['rating'], id: searchResult.searchData[index]['_id']);
+                                      return BottomSheetModalVegetable(name: searchResult.searchData[index]['name'], price: searchResult.searchData[index]['price'], id: searchResult.searchData[index]['_id']);
                                     });
                               },
                               child: Text('View Details', style: TextStyle(color: Colors.blue,))

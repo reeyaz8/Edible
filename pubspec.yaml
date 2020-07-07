@@ -33,6 +33,8 @@ dependencies:
   dio: ^3.0.9
   firebase_storage: ^3.1.6
   toast: ^0.1.5
+  cached_network_image: ^2.2.0+1
+  firebase_image: ^0.1.6
 
 
   # The following adds the Cupertino Icons font to your application.

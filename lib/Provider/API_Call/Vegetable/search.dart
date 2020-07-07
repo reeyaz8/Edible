@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 
-class Search with ChangeNotifier{
+class VegetableSearch with ChangeNotifier{
 
   Dio dio = new Dio();
 
@@ -14,7 +14,6 @@ class Search with ChangeNotifier{
   List _searchData = [];
   List get  searchData => _searchData;
 
-
   retrieveSearchItem (String searchName) async {
     _startSearch = true;
     _searchData = [];
@@ -22,7 +21,7 @@ class Search with ChangeNotifier{
 
     Response response;
 
-    response = await dio.get('http://192.168.254.8:3000/edible/fruit/search?searchq='+searchName);
+    response = await dio.get('http://192.168.254.8:3000/edible/vegetable/search?searchq='+searchName);
     
     _searchData = response.data;
 

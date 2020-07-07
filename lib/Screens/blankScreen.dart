@@ -18,7 +18,7 @@ class _BlankScreenState extends State<BlankScreen> {
     accountload.loadAccountData();
     final mainData = Provider.of<FruitRecommendation>(context, listen: false);
     mainData.retrieveRecommendationData();
-    Timer(Duration(seconds: 10), () {
+    Timer(Duration(seconds: 2), () {
       Navigator.push(context, MaterialPageRoute(builder: (_) => Navigation()));
     });
     return WillPopScope(

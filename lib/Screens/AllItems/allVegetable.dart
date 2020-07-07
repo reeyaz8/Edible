@@ -1,22 +1,19 @@
-import 'dart:io';
-import 'package:Edible/Provider/API_Call/Fruit/allFruit.dart';
+import 'package:Edible/Provider/API_Call/Vegetable/allVegetable.dart';
 import 'package:Edible/Provider/Data/bottomSheetData.dart';
 import 'package:Edible/Provider/Data/cartData.dart';
-import 'package:Edible/Provider/API_Call/Fruit/overhead.dart';
-import 'package:Edible/Provider/pathProvider/path.dart';
+import 'package:Edible/Screens/bottomSheet/bottomSheetVeg.dart';
 import 'package:Edible/Screens/bottomSheet/bottomsheet.dart';
-import 'package:Edible/Screens/SearchPage/fruitsearchPage.dart';
+import 'package:Edible/Screens/SearchPage/vegetablesearchPage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'dart:math';
-class AllFruit extends StatelessWidget {
+class AllVegetable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final fruitData = Provider.of<AllFruitData>(context);
-    final overhead = Provider.of<FruitOverhead>(context);
+    final vegetableData = Provider.of<AllVegetableData>(context);
     final cartdata = Provider.of<CartData>(context);
     final cartlist = Provider.of<CartPageData>(context);
-
+    vegetableData.isLoading == false ? vegetableData.getPartialVegetableData('2', '6'):null;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -25,21 +22,21 @@ class AllFruit extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 0.0,
         centerTitle: true,
-        title: Text('Fruit List', style: TextStyle(color: Colors.blue),),
+        title: Text('Vegetable', style: TextStyle(color: Colors.blue),),
         actions: <Widget>[
           IconButton(icon: Icon(Icons.search, color: Colors.blue), onPressed: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => SearchPage()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => VegetableSearchPage()));
           })
         ],
       ),
 
-      body: fruitData.isLoading == false ? Center(
-        child: CircularProgressIndicator()) 
+      body: vegetableData.isLoading == false ? Center(
+        child: Text('gbgfn')) 
         :
         NotificationListener<ScrollNotification>(
           onNotification: (ScrollNotification scrollInfo){
-            if(fruitData.changeLoadingState == false && scrollInfo.metrics.pixels == scrollInfo.metrics.maxScrollExtent){
-              fruitData.getPartialFruitData(Random().nextInt(11).toString(), Random().nextInt(4).toString());
+            if(vegetableData.changeLoadingState == false && scrollInfo.metrics.pixels == scrollInfo.metrics.maxScrollExtent){
+              vegetableData.getPartialVegetableData(Random().nextInt(11).toString(), Random().nextInt(4).toString());
             }
             return true;
           },
@@ -47,9 +44,9 @@ class AllFruit extends StatelessWidget {
               children: <Widget>[
                 Expanded(
                   child: GridView.builder(
-                  key: PageStorageKey('allfruitlist'),
+                  key: PageStorageKey('allvegetablelist'),
                   physics: BouncingScrollPhysics(),
-                  itemCount: fruitData.newList.length,
+                  itemCount: vegetableData.newList.length,
                   gridDelegate:SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     childAspectRatio:0.7,
@@ -64,15 +61,14 @@ class AllFruit extends StatelessWidget {
                       ),
                       child: GestureDetector(
                           onTap: (){
-                            overhead.retrieveOverheadData(fruitData.newList[index]['_id']);
-                            cartdata.initPrice(int.parse(fruitData.newList[index]['price']));
+                            cartdata.initPrice(int.parse(vegetableData.newList[index]['price']));
                             cartdata.initQuantity();
                             showModalBottomSheet(context: (context), 
                             elevation: 0.0,
                             enableDrag: true,
                             isScrollControlled: true,
                             builder: (_) {
-                              return BottomSheetModal(name: fruitData.newList[index]['fullName'], price: fruitData.newList[index]['price'], rating:fruitData.newList[index]['rating'], id: fruitData.newList[index]['_id']);
+                              return BottomSheetModalVegetable(name: vegetableData.newList[index]['name'], price: vegetableData.newList[index]['price'], id: vegetableData.newList[index]['_id']);
                             });
                           },
                           child: Column(children: <Widget>[
@@ -80,11 +76,11 @@ class AllFruit extends StatelessWidget {
                             width: 100.0,
                             height: 125.0,
                             child: Image.network(
-                                    'https://firebasestorage.googleapis.com/v0/b/edible-8888.appspot.com/o/Fruits%2F'+fruitData.newList[index]['_id']+'.png?alt=media&token=280273e0-ccae-43fb-97a3-afe95a73683e'
+                                    'https://firebasestorage.googleapis.com/v0/b/edible-8888.appspot.com/o/Vegetables%2F'+vegetableData.newList[index]['_id']+'.png?alt=media&token=280273e0-ccae-43fb-97a3-afe95a73683e'
                             ),
                           ),
                           SizedBox(height:8.0),
-                          Text(fruitData.newList[index]['fullName'],
+                          Text(vegetableData.newList[index]['name'],
                           style: TextStyle(color: Colors.white, fontSize:18.0),),
                           SizedBox(height:5.0),
                           Container(
@@ -95,7 +91,7 @@ class AllFruit extends StatelessWidget {
                               children: <Widget>[
                                 Container(
                                   margin: EdgeInsets.only(left:8.0),
-                                  child: Text('Rs. '+fruitData.newList[index]['price']+' /kg', style: TextStyle(color: Colors.white, fontSize: 16.0))
+                                  child: Text('Rs. '+vegetableData.newList[index]['price']+' /kg', style: TextStyle(color: Colors.white, fontSize: 16.0))
                                   ),
                                 IconButton(icon: Icon(Icons.favorite, color: Colors.white,), onPressed: () {
                                   print('Added to Favorites');
@@ -114,7 +110,7 @@ class AllFruit extends StatelessWidget {
                                 ),
                                 color: Colors.white,
                                 onPressed: (){
-                                  cartlist.updateCartList(fruitData.newList[index]['fullName'], '1', fruitData.newList[index]['price']);
+                                  cartlist.updateCartList(vegetableData.newList[index]['name'], '1', vegetableData.newList[index]['price']);
                                 },
                                 child: Text('ADD TO CART', style: TextStyle(color: Colors.red,))
                               ),
@@ -126,7 +122,7 @@ class AllFruit extends StatelessWidget {
                   }),
                 ),
                 Container(
-                  child: fruitData.changeLoadingState == true ? Text('Loading...'): null,
+                  child: vegetableData.changeLoadingState == true ? Text('Loading...'): null,
                 )
               ],
             ),

@@ -21,7 +21,7 @@ class FruitOverhead with ChangeNotifier{
     _nutrition = {};
     Response response;
 
-    response = await dio.get('http://192.168.254.8:3000/edible/overhead?id='+id);
+    response = await dio.get('http://192.168.254.8:3000/edible/fruit/overhead?id='+id);
     
     _description = response.data[0]['description'];
 

@@ -7,8 +7,8 @@ import 'package:Edible/Provider/API_Call/Fruit/mainPage.dart';
 import 'package:Edible/Provider/API_Call/Fruit/overhead.dart';
 import 'package:Edible/Provider/pathProvider/path.dart';
 import 'package:Edible/Screens/AllItems/allFruit.dart';
-import 'package:Edible/Screens/bottomsheet.dart';
-import 'package:Edible/Screens/searchPage.dart';
+import 'package:Edible/Screens/bottomSheet/bottomsheet.dart';
+import 'package:Edible/Screens/SearchPage/fruitsearchPage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -110,7 +110,9 @@ class FruitPage extends StatelessWidget {
                               Container(
                                 height: 100.0,
                                 width: 100.0,
-                                child: Image.file(File(path.fullPath+data.recommenddata[index]['_id']))),
+                                child: Image.network(
+                                    'https://firebasestorage.googleapis.com/v0/b/edible-8888.appspot.com/o/Fruits%2F'+data.recommenddata[index]['_id']+'.png?alt=media&token=280273e0-ccae-43fb-97a3-afe95a73683e'
+                                )),
                               SizedBox(height: 15.0),
                               Container(
                                 alignment: Alignment.center,
@@ -203,7 +205,9 @@ class FruitPage extends StatelessWidget {
                           child: Column(children: <Widget>[
                               Container(
                                 height: MediaQuery.of(context).size.height - 550,
-                                child: Image.file(File(path.fullPath+data.saledata[index]['_id']))),
+                                child: Image.network(
+                                    'https://firebasestorage.googleapis.com/v0/b/edible-8888.appspot.com/o/Fruits%2F'+data.saledata[index]['_id']+'.png?alt=media&token=280273e0-ccae-43fb-97a3-afe95a73683e'
+                                )),
                               SizedBox(height: 15.0),
                               Container(
                                 alignment: Alignment.center,
@@ -260,7 +264,7 @@ class FruitPage extends StatelessWidget {
             Text('Rs. 100'),
             GestureDetector(
               onTap: (){
-                print('added to cart');
+                cartlist.updateCartList('Fruit Offer', '1', '100');
               },
               child: Icon(Icons.add_shopping_cart, size: 26.0,))
           ],)

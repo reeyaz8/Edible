@@ -6,10 +6,9 @@ import 'package:Edible/Screens/NavBarScreens/fruitPage.dart';
 import 'package:Edible/Screens/NavBarScreens/vegetablePage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'NavBarScreens/bakeryPage.dart';
+import 'package:Edible/Screens/NavBarScreens/bakeryPage.dart';
 
 class Navigation extends StatelessWidget {
-  int _selectedIndex = 2;
   List<Widget> screens = [BakeryPage(), BeveragePage(), FruitPage(), VegetablePage(), CartPage(), AccountPage()];
   @override
   Widget build(BuildContext context) {
