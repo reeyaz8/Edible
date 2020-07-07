@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 
 class NavRailIndex with ChangeNotifier{
   
-  int _currentIndex = 3;
+  int _currentIndex = 5;
   int get currentIndex => _currentIndex;
 
   changeIndex(int index){
