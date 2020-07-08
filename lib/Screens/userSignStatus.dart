@@ -1,4 +1,5 @@
 import 'package:Edible/Provider/pathProvider/path.dart';
+import 'package:Edible/Screens/NavigationRail.dart';
 import 'package:Edible/Screens/blankScreen.dart';
 import 'package:Edible/Screens/splashscreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -17,7 +18,7 @@ class _SignInStatusState extends State<SignInStatus> {
 
     SharedPreferences.getInstance().then((preferences) {
       if(preferences.getString('name') != null && preferences.getString('phone') != null){
-          Navigator.push(context, MaterialPageRoute(builder: (context) => BlankScreen()));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => Navigation()));
       }else{
           Navigator.push(context, MaterialPageRoute(builder: (context) => SplashScreen()));
 

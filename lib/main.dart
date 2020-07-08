@@ -1,8 +1,13 @@
+import 'package:Edible/Provider/API_Call/BeveragesAPI/hardBeverage.dart';
+import 'package:Edible/Provider/API_Call/BeveragesAPI/search.dart';
+import 'package:Edible/Provider/API_Call/BeveragesAPI/softBeverage.dart';
+import 'package:Edible/Provider/API_Call/BeveragesAPI/trendingPage.dart';
 import 'package:Edible/Provider/API_Call/Fruit/allFruit.dart';
 import 'package:Edible/Provider/API_Call/Vegetable/allVegetable.dart';
 import 'package:Edible/Provider/API_Call/Vegetable/mainPage.dart';
 import 'package:Edible/Provider/API_Call/Vegetable/search.dart';
 import 'package:Edible/Provider/Data/accountData.dart';
+import 'package:Edible/Provider/Data/beverage.dart';
 import 'package:Edible/Provider/Data/bottomSheetData.dart';
 import 'package:Edible/Provider/Data/cartData.dart';
 import 'package:Edible/Provider/API_Call/Fruit/mainPage.dart';
@@ -36,7 +41,12 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => AllFruitData()),
         ChangeNotifierProvider(create: (_) => AllVegetableData()),
         ChangeNotifierProvider(create: (_) => VegetableSearch()),
+        ChangeNotifierProvider(create: (_) => BeverageSearch()),
+        ChangeNotifierProvider(create: (_) => AllSoftBeverageData()),
+        ChangeNotifierProvider(create: (_) => AllHardBeverageData()),
         ChangeNotifierProvider(create: (_) => FruitOverhead()),
+        ChangeNotifierProvider(create: (_) => BeverageRecommendation()),
+        ChangeNotifierProvider(create: (_) => BeverageProvider()),
         ChangeNotifierProvider(create: (_) => Search()),
         ChangeNotifierProvider(create: (_) => CartData()),
         ChangeNotifierProvider(create: (_) => AccountInfo()),

@@ -1,8 +1,8 @@
 import 'package:Edible/Provider/API_Call/Vegetable/mainPage.dart';
-import 'package:Edible/Provider/Data/bottomSheetData.dart';
 import 'package:Edible/Provider/Data/cartData.dart';
 import 'package:Edible/Screens/AllItems/allVegetable.dart';
 import 'package:Edible/Screens/SearchPage/vegetablesearchPage.dart';
+import 'package:Edible/Screens/bottomSheet/bottomSheetVeg.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -62,67 +62,78 @@ class VegetablePage extends StatelessWidget {
                             scrollDirection: Axis.horizontal,
                             itemCount: data.recommenddata.length,
                             itemBuilder: (context, int index) {
-                              return Container(
-                                  decoration: BoxDecoration(
-                                      color: Colors.blue,
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(12.0))),
-                                  width: 150.0,
-                                  margin: EdgeInsets.only(right: 10.0),
-                                  alignment: Alignment.topCenter,
-                                  child: Column(
-                                    children: <Widget>[
-                                      SizedBox(height: 5.0),
-                                      Container(
-                                          height: 100.0,
-                                          width: 100.0,
-                                          child: Image.network(
-                                              'https://firebasestorage.googleapis.com/v0/b/edible-8888.appspot.com/o/Vegetables%2F' +
-                                                  data.recommenddata[index]
-                                                      ['_id'] +
-                                                  '.png?alt=media&token=64dbb74b-1c94-4069-acf2-b94a6ff39ffd')),
-                                      SizedBox(height: 5.0),
-                                      Container(
-                                        child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                            children: <Widget>[
-                                              IconButton(
-                                                icon: Icon(
-                                                    Icons.favorite_border,
-                                                    color: Colors.white),
-                                                onPressed: () {},
-                                              ),
-                                              IconButton(
-                                                icon: Icon(
-                                                    Icons.add_shopping_cart,
-                                                    color: Colors.white),
-                                                onPressed: () {
-                                                  cartlist.updateCartList(
-                                                      data.recommenddata[index]
-                                                          ['name'],
-                                                      "1",
-                                                      data.recommenddata[index]
-                                                          ['price']);
-                                                },
-                                              ),
-                                            ]),
-                                      ),
-                                      Text(data.recommenddata[index]['name'],
+                              return GestureDetector(
+                                    onTap: (){
+                                      showModalBottomSheet(context: (context), 
+                                      elevation: 0.0,
+                                      enableDrag: true,
+                                      isScrollControlled: true,
+                                      builder: (_) {
+                                        return BottomSheetModalVegetable(name: data.recommenddata[index]['name'], price: data.recommenddata[index]['price'], id: data.recommenddata[index]['_id']);
+                                      });
+                                    },
+                                    child: Container(
+                                    decoration: BoxDecoration(
+                                        color: Colors.blue,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(12.0))),
+                                    width: 150.0,
+                                    margin: EdgeInsets.only(right: 10.0),
+                                    alignment: Alignment.topCenter,
+                                    child: Column(
+                                      children: <Widget>[
+                                        SizedBox(height: 5.0),
+                                        Container(
+                                            height: 100.0,
+                                            width: 100.0,
+                                            child: Image.network(
+                                                'https://firebasestorage.googleapis.com/v0/b/edible-8888.appspot.com/o/Vegetables%2F' +
+                                                    data.recommenddata[index]
+                                                        ['_id'] +
+                                                    '.png?alt=media&token=64dbb74b-1c94-4069-acf2-b94a6ff39ffd')),
+                                        SizedBox(height: 5.0),
+                                        Container(
+                                          child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceAround,
+                                              children: <Widget>[
+                                                IconButton(
+                                                  icon: Icon(
+                                                      Icons.favorite_border,
+                                                      color: Colors.white),
+                                                  onPressed: () {},
+                                                ),
+                                                IconButton(
+                                                  icon: Icon(
+                                                      Icons.add_shopping_cart,
+                                                      color: Colors.white),
+                                                  onPressed: () {
+                                                    cartlist.updateCartList(
+                                                        data.recommenddata[index]
+                                                            ['name'],
+                                                        "1 Kg",
+                                                        data.recommenddata[index]
+                                                            ['price']);
+                                                  },
+                                                ),
+                                              ]),
+                                        ),
+                                        Text(data.recommenddata[index]['name'],
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 18.0)),
+                                        SizedBox(height: 5.0),
+                                        Text(
+                                          'Rs. ' +
+                                              data.recommenddata[index]['price'] +
+                                              ' /kg',
                                           style: TextStyle(
                                               color: Colors.white,
-                                              fontSize: 18.0)),
-                                      SizedBox(height: 5.0),
-                                      Text(
-                                        'Rs. ' +
-                                            data.recommenddata[index]['price'] +
-                                            ' /kg',
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 14.0),
-                                      )
-                                    ],
-                                  ));
+                                              fontSize: 14.0),
+                                        )
+                                      ],
+                                    )),
+                              );
                             },
                           )),
                       SizedBox(height: 15.0),
@@ -160,63 +171,76 @@ class VegetablePage extends StatelessWidget {
                             physics: BouncingScrollPhysics(),
                             itemCount: data.saledata.length,
                             itemBuilder: (context, int index) {
-                              return Container(
-                                  margin: EdgeInsets.only(bottom: 10.0),
-                                  padding: EdgeInsets.all(8.0),
-                                  height: 100.0,
-                                  decoration: BoxDecoration(
-                                      color: Colors.blue,
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(12.0))),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: <Widget>[
-                                      Container(
-                                          height: 100.0,
-                                          width: 100.0,
-                                          child: Image.network(
-                                              'https://firebasestorage.googleapis.com/v0/b/edible-8888.appspot.com/o/Vegetables%2F' +
-                                                  data.saledata[index]['_id'] +
-                                                  '.png?alt=media&token=64dbb74b-1c94-4069-acf2-b94a6ff39ffd')),
-                                      Container(
-                                          child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: <Widget>[
-                                          Text(
-                                            data.saledata[index]['name'],
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 18.0),
-                                          ),
-                                        ],
-                                      )),
-                                      Column(
+                              return GestureDetector(
+                                    onTap: (){
+                                       showModalBottomSheet(context: (context), 
+                                      elevation: 0.0,
+                                      enableDrag: true,
+                                      isScrollControlled: true,
+                                      builder: (_) {
+                                        return BottomSheetModalVegetable(name: data.saledata[index]['name'], price: data.saledata[index]['price'], id: data.saledata[index]['_id']);
+                                      });
+                                    },
+                                    child: Container(
+                                    margin: EdgeInsets.only(bottom: 10.0),
+                                    padding: EdgeInsets.all(8.0),
+                                    height: 100.0,
+                                    decoration: BoxDecoration(
+                                        color: Colors.blue,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(12.0))),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: <Widget>[
+                                        Container(
+                                            height: 100.0,
+                                            width: 100.0,
+                                            child: Image.network(
+                                                'https://firebasestorage.googleapis.com/v0/b/edible-8888.appspot.com/o/Vegetables%2F' +
+                                                    data.saledata[index]['_id'] +
+                                                    '.png?alt=media&token=64dbb74b-1c94-4069-acf2-b94a6ff39ffd')),
+                                        Container(
+                                            child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.center,
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           children: <Widget>[
                                             Text(
-                                              'Rs. ' +
-                                                  data.saledata[index]
-                                                      ['price'] +
-                                                  ' /kg',
+                                              data.saledata[index]['name'],
                                               style: TextStyle(
                                                   color: Colors.white,
-                                                  fontSize: 16.0),
+                                                  fontSize: 18.0),
                                             ),
-                                            IconButton(
-                                                icon: Icon(
-                                                    Icons.add_shopping_cart,
-                                                    color: Colors.white),
-                                                onPressed: () {})
-                                          ])
-                                    ],
-                                  ));
+                                          ],
+                                        )),
+                                        Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: <Widget>[
+                                              Text(
+                                                'Rs. ' +
+                                                    data.saledata[index]
+                                                        ['price'] +
+                                                    ' /kg',
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 16.0),
+                                              ),
+                                              IconButton(
+                                                  icon: Icon(
+                                                      Icons.add_shopping_cart,
+                                                      color: Colors.white),
+                                                  onPressed: () {
+                                                      cartlist.updateCartList(data.saledata[index]['name'], '1 Kg', data.saledata[index]['price']);
+                                                  })
+                                            ])
+                                      ],
+                                    )),
+                              );
                             }),
                       ))
                     ]),

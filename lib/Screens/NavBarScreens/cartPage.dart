@@ -45,57 +45,37 @@ class CartPage extends StatelessWidget {
                           itemCount: cartlist.listData.length,
                           itemBuilder: (context, int index) {
                             return Container(
-                              margin: EdgeInsets.only(
-                                  bottom: 10.0, left: 10.0, right: 10.0),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                                color: Colors.blue
+                              ),
+                              padding: EdgeInsets.all(8.0),
+                              margin: EdgeInsets.only(bottom: 10.0, left: 10.0, right: 10.0),
                               child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.end,
                                 children: <Widget>[
                                   Container(
-                                      decoration: BoxDecoration(
-                                          color: Colors.orangeAccent,
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(12.0))),
-                                      alignment: Alignment.center,
-                                      height: 40.0,
-                                      width: MediaQuery.of(context).size.width /
-                                          2.5,
-                                      child: Text(cartlist.listData[index]
-                                          ['fullName'])),
-                                  Container(
-                                      alignment: Alignment.center,
-                                      padding: EdgeInsets.only(
-                                          left: 10.0, right: 10.0),
-                                      height: 40.0,
-                                      decoration: BoxDecoration(
-                                          color: Colors.orangeAccent,
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(12.0))),
-                                      child: Text(cartlist.listData[index]
-                                              ['quantity'] +
-                                          ' kg')),
-                                  Container(
-                                      alignment: Alignment.center,
-                                      padding: EdgeInsets.only(
-                                          left: 10.0, right: 10.0),
-                                      height: 40.0,
-                                      decoration: BoxDecoration(
-                                          color: Colors.orangeAccent,
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(12.0))),
-                                      child: Text('Rs. ' +
-                                          cartlist.listData[index]['price'])),
-                                  Container(
-                                      child: GestureDetector(
-                                          onTap: () {
-                                            cartlist.deleteCartList(
+                                    width: MediaQuery.of(context).size.width - 130.0,
+                                    child: Column(children: <Widget>[
+                                      FittedBox(child: Text(cartlist.listData[index]['fullName'], style: TextStyle(fontSize: 16.0, color: Colors.white))),
+                                      SizedBox(height: 8.0),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                        children: <Widget>[
+                                          Text('Rs. '+cartlist.listData[index]['price'], style: TextStyle(fontSize: 14.0, color: Colors.white)),
+                                          Text(cartlist.listData[index]['quantity'], style: TextStyle(fontSize: 14.0, color: Colors.white)),
+                                        ],
+                                      ),
+                                    ],),
+                                  ),
+                                IconButton(icon: Icon(Icons.delete, color: Colors.white), onPressed: (){
+                                  cartlist.deleteCartList(
                                                 index,
                                                 cartlist.listData[index]
                                                     ['price']);
-                                          },
-                                          child: Icon(Icons.delete))),
+                                },)
                                 ],
-                              ),
+                              )
                             );
                           }))
             ],
