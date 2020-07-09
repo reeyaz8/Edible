@@ -21,9 +21,13 @@ class BeverageSearch with ChangeNotifier{
 
     Response response;
 
-    response = await dio.get('http://192.168.254.8:3000/edible/beverages/search?type=soft&searchq='+searchName);
+    response = await dio.get('http://192.168.254.8:3000/edible/beverages/search?searchq='+searchName);
     
-    _searchData = response.data;
+    _searchData.addAll(response.data);
+
+    response = await dio.get('http://192.168.254.8:3000/edible/beverageshard/search?searchq='+searchName);
+    
+    _searchData.addAll(response.data);
 
     _startSearch = false;
 

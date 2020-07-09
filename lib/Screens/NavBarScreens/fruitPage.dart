@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 import 'package:Edible/Provider/API_Call/Fruit/allFruit.dart';
 import 'package:Edible/Provider/Data/bottomSheetData.dart';
 import 'package:Edible/Provider/Data/cartData.dart';
@@ -202,12 +203,6 @@ class FruitPage extends StatelessWidget {
                         ),
                         FlatButton(
                             onPressed: () {
-                              final fruitData = Provider.of<AllFruitData>(
-                                  context,
-                                  listen: false);
-                              if (fruitData.newList.length == 0) {
-                                fruitData.getPartialFruitData('0', '6');
-                              }
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(

@@ -2,7 +2,6 @@ import 'package:Edible/Provider/API_Call/Vegetable/allVegetable.dart';
 import 'package:Edible/Provider/Data/bottomSheetData.dart';
 import 'package:Edible/Provider/Data/cartData.dart';
 import 'package:Edible/Screens/bottomSheet/bottomSheetVeg.dart';
-import 'package:Edible/Screens/bottomSheet/bottomsheet.dart';
 import 'package:Edible/Screens/SearchPage/vegetablesearchPage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -13,7 +12,7 @@ class AllVegetable extends StatelessWidget {
     final vegetableData = Provider.of<AllVegetableData>(context);
     final cartdata = Provider.of<CartData>(context);
     final cartlist = Provider.of<CartPageData>(context);
-    vegetableData.isLoading == false ? vegetableData.getPartialVegetableData('2', '6'):null;
+    vegetableData.isLoading == false ? vegetableData.getPartialVegetableData('4', '6'):null;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -31,12 +30,12 @@ class AllVegetable extends StatelessWidget {
       ),
 
       body: vegetableData.isLoading == false ? Center(
-        child: Text('gbgfn')) 
+        child: CircularProgressIndicator()) 
         :
         NotificationListener<ScrollNotification>(
           onNotification: (ScrollNotification scrollInfo){
             if(vegetableData.changeLoadingState == false && scrollInfo.metrics.pixels == scrollInfo.metrics.maxScrollExtent){
-              vegetableData.getPartialVegetableData(Random().nextInt(11).toString(), Random().nextInt(4).toString());
+              vegetableData.getPartialVegetableData(Random().nextInt(12).toString(), Random().nextInt(7).toString());
             }
             return true;
           },
@@ -110,7 +109,7 @@ class AllVegetable extends StatelessWidget {
                                 ),
                                 color: Colors.white,
                                 onPressed: (){
-                                  cartlist.updateCartList(vegetableData.newList[index]['name'], '1', vegetableData.newList[index]['price']);
+                                  cartlist.updateCartList(vegetableData.newList[index]['name'], '1 kg', vegetableData.newList[index]['price']);
                                 },
                                 child: Text('ADD TO CART', style: TextStyle(color: Colors.red,))
                               ),

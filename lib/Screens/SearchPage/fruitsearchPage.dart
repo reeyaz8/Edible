@@ -83,7 +83,7 @@ class SearchPage extends StatelessWidget {
                           style: TextStyle(color: Colors.white, fontSize:16.0),)
                           ),
                           IconButton(icon: Icon(Icons.add_shopping_cart, color: Colors.white, size: 20.0,), onPressed: (){
-                            cartlist.updateCartList(searchResult.searchData[index]['fullName'], '1' ,searchResult.searchData[index]['price']);
+                            cartlist.updateCartList(searchResult.searchData[index]['fullName'], '1 kg' ,searchResult.searchData[index]['price']);
                           })
                         ],
                         ),

@@ -65,9 +65,12 @@ class BeverageSearchPage extends StatelessWidget {
                     ),
                     child: Column(children:<Widget>[
                         SizedBox(height: 8.0),
-                        Text(searchResult.searchData[index]['name'], style: TextStyle(color: Colors.white, fontSize:20.0),),
+                        FittedBox(child: Text(searchResult.searchData[index]['name'], style: TextStyle(color: Colors.white, fontSize:20.0),)),
                         SizedBox(height: 8.0),
-                          Text(searchResult.searchData[index]['amt']+' '+searchResult.searchData[index]['unit'], style: TextStyle(color: Colors.white, fontSize:16.0),),
+                        searchResult.searchData[index]['unit'] == null? 
+                        Text(searchResult.searchData[index]['amt']+' ml', style: TextStyle(color: Colors.white, fontSize:16.0),)
+                        :
+                        Text(searchResult.searchData[index]['amt']+' '+searchResult.searchData[index]['unit'], style: TextStyle(color: Colors.white, fontSize:16.0),),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
@@ -75,7 +78,7 @@ class BeverageSearchPage extends StatelessWidget {
                           style: TextStyle(color: Colors.white, fontSize:16.0),)
                           ),
                           IconButton(icon: Icon(Icons.add_shopping_cart, color: Colors.white, size: 20.0,), onPressed: (){
-                            cartlist.updateCartList(searchResult.searchData[index]['name'], '1* '+searchResult.searchData[index]['amt']+' '+searchResult.searchData[index]['unit'] ,searchResult.searchData[index]['price']);
+                            cartlist.updateCartList(searchResult.searchData[index]['name'], '1 * '+searchResult.searchData[index]['amt']+' '+searchResult.searchData[index]['unit'] ,searchResult.searchData[index]['price']);
                           })
                         ],
                         ),
@@ -95,7 +98,14 @@ class BeverageSearchPage extends StatelessWidget {
                                     enableDrag: true,
                                     isScrollControlled: true,
                                     builder: (_) {
-                                        return BottomSheetModalBeverage(name: searchResult.searchData[index]['name'], price: searchResult.searchData[index]['price'], unit:searchResult.searchData[index]['unit'] ,amt:searchResult.searchData[index]['amt'], id: searchResult.searchData[index]['_id']);
+                                        return BottomSheetModalBeverage(
+                                        name: searchResult.searchData[index]['name'], 
+                                        price: searchResult.searchData[index]['price'], 
+                                        unit:searchResult.searchData[index]['unit'] == null ? ' ml' : searchResult.searchData[index]['unit'] ,
+                                        amt:searchResult.searchData[index]['amt'],
+                                        type: searchResult.searchData[index]['rating'] == null? 'soft':'hard',
+                                        rating:  searchResult.searchData[index]['rating'] == null? ' ': searchResult.searchData[index]['rating'] ,
+                                        id: searchResult.searchData[index]['_id']);
                                     });
                               },
                               child: Text('View Details', style: TextStyle(color: Colors.blue,))

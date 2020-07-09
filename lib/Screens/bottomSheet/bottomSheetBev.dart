@@ -83,7 +83,7 @@ class BottomSheetModalBeverage extends StatelessWidget{
               ),
               color: Colors.white,
               onPressed: (){
-                cartlist.updateCartList(name, cartdata.quantity.toString()+'* '+amt+' '+unit, cartdata.price.toString());
+                cartlist.updateCartList(name, cartdata.quantity.toString()+' * '+amt+' '+unit, cartdata.price.toString());
                 Navigator.pop(context);
               },
               child: Text('ADD TO CART', style: TextStyle(color: Colors.blue,))

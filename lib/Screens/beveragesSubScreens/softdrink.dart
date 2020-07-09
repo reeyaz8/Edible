@@ -12,11 +12,11 @@ class SoftDrink extends StatelessWidget {
     final cartlist = Provider.of<CartPageData>(context);
     final cartdata = Provider.of<CartData>(context);
     final beverageData = Provider.of<AllSoftBeverageData>(context);
-    beverageData.isLoading == false ? beverageData.getPartialBeverageData('2', '6') : null;
-    if (beverageData.isLoading == false) {
-      return Center(child: CircularProgressIndicator());
-    } else {
-      return Container(
+    beverageData.isLoading == false ? beverageData.getPartialBeverageData('3', '8') : null;
+    return Container(
+      child: beverageData.isLoading == false ? 
+    Center(child: CircularProgressIndicator(),) : 
+    Container(
         height: MediaQuery.of(context).size.height - 170.0,
         child: NotificationListener<ScrollNotification>(
             onNotification: (ScrollNotification scrollInfo) {
@@ -103,7 +103,7 @@ class SoftDrink extends StatelessWidget {
                                         icon: Icon(Icons.add_shopping_cart,
                                             color: Colors.white),
                                         onPressed: () {
-                                          cartlist.updateCartList(beverageData.newList[index]['name'], '1 unit', beverageData.newList[index]['price']);
+                                          cartlist.updateCartList(beverageData.newList[index]['name'], '1 * '+beverageData.newList[index]['amt']+' '+beverageData.newList[index]['unit'], beverageData.newList[index]['price']);
                                         })
                                   ],
                                 ),
@@ -118,7 +118,6 @@ class SoftDrink extends StatelessWidget {
               ],
             ),
         ),
-      );
+      ));
     }
-  }
 }

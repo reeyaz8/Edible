@@ -19,7 +19,6 @@ import 'package:Edible/Provider/LoginService/login.dart';
 import 'package:Edible/Provider/LoginService/loginProvider.dart';
 import 'package:Edible/Provider/LoginService/phoneLoginService.dart';
 import 'package:Edible/Provider/LoginService/registerProvider.dart';
-import 'package:Edible/Provider/pathProvider/path.dart';
 import 'package:Edible/Screens/userSignStatus.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -34,7 +33,6 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => Login()),
-        ChangeNotifierProvider(create: (_) => PathProvider()),
         ChangeNotifierProvider(create: (_) => NavRailIndex()),
         ChangeNotifierProvider(create: (_) => FruitRecommendation()),
         ChangeNotifierProvider(create: (_) => VegetableRecommendation()),

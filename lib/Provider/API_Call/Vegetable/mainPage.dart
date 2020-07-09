@@ -21,8 +21,6 @@ class VegetableRecommendation with ChangeNotifier {
       _recommenddata = collection["recommend"];
       _saledata = collection["hotsale"];
       _hasData = true;
-      print(_saledata);
-      print(_recommenddata);
       notifyListeners();
     }
   }

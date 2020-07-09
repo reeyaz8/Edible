@@ -1,9 +1,7 @@
-import 'dart:io';
 import 'package:Edible/Provider/API_Call/Fruit/allFruit.dart';
 import 'package:Edible/Provider/Data/bottomSheetData.dart';
 import 'package:Edible/Provider/Data/cartData.dart';
 import 'package:Edible/Provider/API_Call/Fruit/overhead.dart';
-import 'package:Edible/Provider/pathProvider/path.dart';
 import 'package:Edible/Screens/bottomSheet/bottomsheet.dart';
 import 'package:Edible/Screens/SearchPage/fruitsearchPage.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +14,7 @@ class AllFruit extends StatelessWidget {
     final overhead = Provider.of<FruitOverhead>(context);
     final cartdata = Provider.of<CartData>(context);
     final cartlist = Provider.of<CartPageData>(context);
+    fruitData.isLoading == false ? fruitData.getPartialFruitData('3', '6'):null;
 
     return Scaffold(
       backgroundColor: Colors.white,

@@ -1,4 +1,5 @@
 import 'package:Edible/Provider/API_Call/Vegetable/mainPage.dart';
+import 'package:Edible/Provider/Data/bottomSheetData.dart';
 import 'package:Edible/Provider/Data/cartData.dart';
 import 'package:Edible/Screens/AllItems/allVegetable.dart';
 import 'package:Edible/Screens/SearchPage/vegetablesearchPage.dart';
@@ -11,6 +12,8 @@ class VegetablePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final data = Provider.of<VegetableRecommendation>(context);
     final cartlist = Provider.of<CartPageData>(context);
+    final cartdata = Provider.of<CartData>(context);
+
     data.hasData == false ? data.retrieveRecommendationData() : null;
     return Scaffold(
         backgroundColor: Colors.white,
@@ -64,6 +67,9 @@ class VegetablePage extends StatelessWidget {
                             itemBuilder: (context, int index) {
                               return GestureDetector(
                                     onTap: (){
+                                       cartdata.initPrice(int.parse(
+                                      data.recommenddata[index]['price']));
+                                  cartdata.initQuantity();
                                       showModalBottomSheet(context: (context), 
                                       elevation: 0.0,
                                       enableDrag: true,
@@ -173,6 +179,9 @@ class VegetablePage extends StatelessWidget {
                             itemBuilder: (context, int index) {
                               return GestureDetector(
                                     onTap: (){
+                                  cartdata.initPrice(int.parse(
+                                      data.saledata[index]['price']));
+                                  cartdata.initQuantity();
                                        showModalBottomSheet(context: (context), 
                                       elevation: 0.0,
                                       enableDrag: true,

@@ -1,8 +1,10 @@
 import 'package:Edible/Provider/LoginService/phoneLoginService.dart';
 import 'package:Edible/Provider/LoginService/registerProvider.dart';
+import 'package:Edible/Provider/LoginService/userChecker.dart';
 import 'package:Edible/Screens/registerScreens/otpVerification.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:toast/toast.dart';
 
 class RegisterPage extends StatelessWidget {
   TextEditingController _countrycodecontroller = TextEditingController(text: '+977');
@@ -184,9 +186,34 @@ class RegisterPage extends StatelessWidget {
                       registerProvider.getFullName(_fullnamecontroller.text.trim());
                       registerProvider.getMobileNumber(_mobilenumbercontroller.text.trim());
                       if(registerProvider.hasgenderselected == true && registerProvider.conditionaccepted == true && registerProvider.invalidFullName == false && registerProvider.isMobileInvalid == false){
+                           showDialog(
+                              barrierDismissible: false,
+                              context: context, builder:(context){
+                              return AlertDialog(
+                                content: Container(
+                                  height: 50.0,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children:<Widget>[
+                                        CircularProgressIndicator(),
+                                        SizedBox(width:50.0),
+                                        Text('Please Wait...')
+                                    ]
+                                  ),
+                                ),
+                              );
+                            });
+                        CheckUser().checkUser(_mobilenumbercontroller.text.trim()).then((value){
+                        if(value == true){
                           PhoneSignClass().signInwithPhone(context, _countrycodecontroller.text+_mobilenumbercontroller.text);
                           Navigator.push(context, MaterialPageRoute(builder: (context) => OTPVerification(phonenumber : _countrycodecontroller.text.trim()+'-'+_mobilenumbercontroller.text.trim())));
+                        }else{
+                          Navigator.pop(context);
+                          Toast.show('User Already Exists', context, duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+                        }
+                      });
                       }
+                     
                       }, child: Text('Proceed', style: TextStyle(color: Colors.white),),),),
                   SizedBox(height: 15.0,),
                   Container(

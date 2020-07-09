@@ -1,21 +1,11 @@
-import 'dart:async';
 import 'package:Edible/Screens/loginPage.dart';
 import 'package:Edible/Screens/registerScreens/registerPage.dart';
 import 'package:flutter/material.dart';
-class SplashScreen extends StatefulWidget {
-  @override
-  _SplashScreenState createState() => _SplashScreenState();
-}
 
-class _SplashScreenState extends State<SplashScreen> {
-  bool showContainer = false;
+class SplashScreen extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
-    Timer(Duration(seconds: 3), () {
-      setState(() {
-        showContainer = true;
-      });
-    });
     return WillPopScope(
         onWillPop: () async => false,
         child: Scaffold(

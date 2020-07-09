@@ -68,7 +68,7 @@ class FinalProcess extends StatelessWidget {
                       child: Column(children: <Widget>[
                         Text(allregisterdata.name),
                         SizedBox(height:8.0),
-                        Text(allregisterdata.gender),
+                        allregisterdata.gender == "0" ? Text("Male"):Text("Female"),
                         SizedBox(height:8.0),
                         Text(allregisterdata.mobile),
                         SizedBox(height:8.0),
