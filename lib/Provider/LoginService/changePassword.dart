@@ -75,7 +75,7 @@ class ChangePassword with ChangeNotifier{
       "oldpassword": currentPassword,
       "newpassword": confirmnewPassword,
     };
-    HttpClientRequest request = await client.patchUrl(Uri.parse('http://192.168.254.8:3000/edible/changepassword'));
+    HttpClientRequest request = await client.patchUrl(Uri.parse('http://192.168.1.136:3000/edible/changepassword'));
     request.headers.set('content-type', 'application/json');
     request.contentLength = -1;
     request.add(utf8.encode(json.encode(password)));

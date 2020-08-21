@@ -18,7 +18,7 @@ class AllSoftBeverageData with ChangeNotifier{
 
     Response response;
 
-    response = await dio.get('http://192.168.254.8:3000/edible/beverages/allItem?type=soft&skip='+skip+'&limit='+limit);
+    response = await dio.get('http://192.168.1.136:3000/edible/beverages/allItem?type=soft&skip='+skip+'&limit='+limit);
     
     if(response.statusCode == 200){
       List collection = response.data;

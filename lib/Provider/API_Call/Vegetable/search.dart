@@ -21,7 +21,7 @@ class VegetableSearch with ChangeNotifier{
 
     Response response;
 
-    response = await dio.get('http://192.168.254.8:3000/edible/vegetable/search?searchq='+searchName);
+    response = await dio.get('http://192.168.1.136:3000/edible/vegetable/search?searchq='+searchName);
     
     _searchData = response.data;
 

@@ -16,7 +16,7 @@ class Login with ChangeNotifier{
     notifyListeners();
     SharedPreferences preferences = await SharedPreferences.getInstance();
     Response response;
-    response = await dio.post('http://192.168.254.8:3000/edible/login/', data: {
+    response = await dio.post('http://192.168.1.136:3000/edible/login/', data: {
         "phone":phone,
         "password":password,
     });

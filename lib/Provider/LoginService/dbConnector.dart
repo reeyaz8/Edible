@@ -13,7 +13,7 @@ class UserEntryDB with ChangeNotifier{
     Response response;
     SharedPreferences preferences = await SharedPreferences.getInstance();
 
-    response = await dio.post('http://192.168.254.8:3000/edible/register/', data: {
+    response = await dio.post('http://192.168.1.136:3000/edible/register/', data: {
         "phone":phone,
         "name": name,
         "password":password,
