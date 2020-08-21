@@ -1,16 +1,26 @@
 # Edible
 
-A new Flutter project.
+An Open Source Online Grocery Shopping App -- Beverages, Fruits & Vegetables
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## ScreenShots
+<p float = 'left'>
+    <img src = 'ScreenShots/Screenshot_2020-08-21-21-45-30.png' width=200 >
+    <img src = 'ScreenShots/Screenshot_2020-08-21-21-45-43.png' width=200 >
+    <img src = 'ScreenShots/Screenshot_2020-08-21-21-45-49.png' width=200 >
+    <img src = 'ScreenShots/Screenshot_2020-08-21-21-46-13.png' width=200 >
+    <img src = 'ScreenShots/Screenshot_2020-08-21-21-46-23.png' width=200 >
+    <img src = 'ScreenShots/Screenshot_2020-08-21-21-46-28.png' width=200 >
+    <img src = 'ScreenShots/Screenshot_2020-08-21-21-46-42.png' width=200 >
+    <img src = 'ScreenShots/Screenshot_2020-08-21-21-46-48.png' width=200 >
+    <img src = 'ScreenShots/Screenshot_2020-08-21-21-46-56.png' width=200 >
+    <img src = 'ScreenShots/Screenshot_2020-08-21-21-47-28.png' width=200 >
+    <img src = 'ScreenShots/Screenshot_2020-08-21-21-47-37.png' width=200 >
+    <img src = 'ScreenShots/Screenshot_2020-08-21-21-47-59.png' width=200 >
+    <img src = 'ScreenShots/Screenshot_2020-08-21-21-48-18.png' width=200 >
+    <img src = 'ScreenShots/Screenshot_2020-08-21-21-48-35.png' width=200 >
+    <img src = 'ScreenShots/Screenshot_2020-08-21-21-48-57.png' width=200 >
+    <img src = 'ScreenShots/Screenshot_2020-08-21-21-49-04.png' width=200 >
+    <img src = 'ScreenShots/Screenshot_2020-08-21-21-49-40.png' width=200 >
+  </p>
