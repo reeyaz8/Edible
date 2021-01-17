@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 
+import '../../constants.dart';
+
 class ChangePassword with ChangeNotifier{
 
   bool _currentPasswordValid;
@@ -75,7 +77,7 @@ class ChangePassword with ChangeNotifier{
       "oldpassword": currentPassword,
       "newpassword": confirmnewPassword,
     };
-    HttpClientRequest request = await client.patchUrl(Uri.parse('http://192.168.1.136:3000/edible/changepassword'));
+    HttpClientRequest request = await client.patchUrl(Uri.parse(baseURL +'/edible/changepassword'));
     request.headers.set('content-type', 'application/json');
     request.contentLength = -1;
     request.add(utf8.encode(json.encode(password)));

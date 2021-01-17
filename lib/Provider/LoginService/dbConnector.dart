@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:toast/toast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../constants.dart';
+
 class UserEntryDB with ChangeNotifier{
 
   Dio dio = new Dio();
@@ -13,7 +15,7 @@ class UserEntryDB with ChangeNotifier{
     Response response;
     SharedPreferences preferences = await SharedPreferences.getInstance();
 
-    response = await dio.post('http://192.168.1.136:3000/edible/register/', data: {
+    response = await dio.post(baseURL +'/edible/register/', data: {
         "phone":phone,
         "name": name,
         "password":password,

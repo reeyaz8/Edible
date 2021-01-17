@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
 
+import '../../constants.dart';
+
 class Login with ChangeNotifier{
   Dio dio = new Dio();
 
@@ -16,7 +18,7 @@ class Login with ChangeNotifier{
     notifyListeners();
     SharedPreferences preferences = await SharedPreferences.getInstance();
     Response response;
-    response = await dio.post('http://192.168.1.136:3000/edible/login/', data: {
+    response = await dio.post(baseURL +'/edible/login/', data: {
         "phone":phone,
         "password":password,
     });

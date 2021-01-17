@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 
+import '../../../constants.dart';
+
 class Search with ChangeNotifier{
 
   Dio dio = new Dio();
@@ -22,7 +24,7 @@ class Search with ChangeNotifier{
 
     Response response;
 
-    response = await dio.get('http://192.168.1.136:3000/edible/fruit/search?searchq='+searchName);
+    response = await dio.get(baseURL +'/edible/fruit/search?searchq='+searchName);
     
     _searchData = response.data;
 

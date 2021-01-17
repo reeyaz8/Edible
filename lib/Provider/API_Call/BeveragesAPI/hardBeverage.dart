@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 
+import '../../../constants.dart';
+
 class AllHardBeverageData with ChangeNotifier{
 
   bool _isLoading = false;
@@ -18,7 +20,7 @@ class AllHardBeverageData with ChangeNotifier{
 
     Response response;
 
-    response = await dio.get('http://192.168.1.136:3000/edible/beverages/allItem?type=hard&skip='+skip+'&limit='+limit);
+    response = await dio.get(baseURL +'/edible/beverages/allItem?type=hard&skip='+skip+'&limit='+limit);
     
     if(response.statusCode == 200){
       List collection = response.data;

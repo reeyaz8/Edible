@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 
+import '../../../constants.dart';
+
 class AllVegetableData with ChangeNotifier {
   bool _isLoading = false;
   bool get isLoading => _isLoading;
@@ -19,7 +21,7 @@ class AllVegetableData with ChangeNotifier {
     Response response;
 
     response = await dio.get(
-        'http://192.168.1.136:3000/edible/vegetable/allItem?skip=' +
+        baseURL +'/edible/vegetable/allItem?skip=' +
             skip +
             '&limit=' +
             limit);

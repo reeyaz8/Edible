@@ -1,6 +1,9 @@
 {
   "project_info": {
-  
+    "project_number": "237885791897",
+    "firebase_url": "https://edible-8888.firebaseio.com",
+    "project_id": "edible-8888",
+    "storage_bucket": "edible-8888.appspot.com"
   },
   "client": [
     {
@@ -12,20 +15,28 @@
       },
       "oauth_client": [
         {
+          "client_id": "237885791897-j9csajsvumnrrj9o1nmjvinrpnpoli98.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.Edible",
+            "certificate_hash": "37cf5a7191d574582970affc10a141cde16d6046"
+          }
+        },
+        {
           "client_id": "237885791897-jv9qccp962e4107nbc4irc212noq9fkd.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-     
+          "current_key": "AIzaSyCnDIX6K3ZhewkoYXIVTsOFaKaz24eDla8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "237885791897-jv9qghbngfngngc4irc212noq9fkd.apps.googleusercontent.com",
+              "client_id": "237885791897-jv9qccp962e4107nbc4irc212noq9fkd.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
@@ -33,5 +44,5 @@
       }
     }
   ],
-  "configuration_version": "f"
+  "configuration_version": "1"
 }

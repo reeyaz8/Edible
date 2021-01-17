@@ -78,7 +78,7 @@ class FruitPage extends StatelessWidget {
                     SizedBox(height: 30.0),
                     Container(
                         margin: EdgeInsets.only(right: 10.0),
-                        height: MediaQuery.of(context).size.height - 450.0,
+                        height: 200,
                         width: MediaQuery.of(context).size.width,
                         color: Colors.white,
                         child: ListView.builder(
@@ -127,10 +127,14 @@ class FruitPage extends StatelessWidget {
                                         height: 100.0,
                                         width: 100.0,
                                         child: Image.network(
-                                            'https://firebasestorage.googleapis.com/v0/b/edible-8888.appspot.com/o/Fruits%2F' +
-                                                data.recommenddata[index]
-                                                    ['_id'] +
-                                                '.png?alt=media&token=280273e0-ccae-43fb-97a3-afe95a73683e')),
+                                          'https://firebasestorage.googleapis.com/v0/b/edible-8888.appspot.com/o/Fruits%2F' +
+                                              data.recommenddata[index]['_id'] +
+                                              '.png?alt=media&token=280273e0-ccae-43fb-97a3-afe95a73683e',
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height -
+                                              550,
+                                        )),
                                     SizedBox(height: 15.0),
                                     Container(
                                         alignment: Alignment.center,

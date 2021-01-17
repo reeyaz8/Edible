@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 
+import '../../../constants.dart';
+
 class BeverageRecommendation with ChangeNotifier {
   Dio dio = new Dio();
   bool _hasData = false;
@@ -16,7 +18,7 @@ class BeverageRecommendation with ChangeNotifier {
 
   retrieveRecommendationData() async {
     Response response;
-    response = await dio.get('http://192.168.1.136:3000/edible/beverages/mainItem');
+    response = await dio.get(baseURL + '/edible/beverages/mainItem');
     
     if (response.statusCode == 200) {
       Map<String, dynamic> collection = json.decode(response.data);

@@ -60,7 +60,6 @@ class PhoneSignClass with ChangeNotifier{
     _auth.signInWithCredential(_authCredential).then((AuthResult result){
       Navigator.push(context, MaterialPageRoute(builder: (context) => PasswordSetup()));
     }).catchError((error){
-      print(error);
       _isOTPValid = false;
       notifyListeners();
     });
